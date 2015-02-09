@@ -34,3 +34,11 @@ function addDevice(deviceName){
 function removeDevice(deviceName){
   // Remove a device with the given name from the simulation
 }
+
+
+exports.importRDT = importRDT;
+exports.importApp = importApp;
+exports.addNetwork = addNetwork;
+exports.removeNetwork = removeNetwork;
+exports.addDevice = addDevice;
+exports.removeDevice = removeDevice;
