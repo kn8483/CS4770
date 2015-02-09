@@ -1,4 +1,4 @@
-function importRDT(rdt){
+function importRDT(rdtName){
   // Import a replicated data type to use in the simulation
 
   /* The RDT will have a common interface like the following after you import
@@ -15,8 +15,16 @@ function importRDT(rdt){
    */
 }
 
-function importApp(app){
+function removeRDT(rdtName){
+  // Remove the RDT from the simulation
+}
+
+function importApp(appName){
   // Import and initialize your web application in the simulation
+}
+
+function removeApp(appName){
+  // Remove the application from the simulation
 }
 
 function addNetwork(networkName, networkKind){
