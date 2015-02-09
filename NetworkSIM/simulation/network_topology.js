@@ -104,3 +104,4 @@ function Device(deviceName){
 
 
 exports.NetworkIterator = NetworkIterator;
+exports.DeviceIterator = DeviceIterator;
