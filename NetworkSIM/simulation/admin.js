@@ -4,7 +4,7 @@ function importRDT(rdt){
   /* The RDT will have a common interface like the following after you import
    * it:
    *
-   *   rdt.init(networkIterator); // initiate the RDT type with your
+   *   rdt.init(networkIterator, deviceIterator); // initiate the RDT type with your
    *   networkIterator from the simulation
    *
    * For a simple integer counter RDT, it will also have methods to increment
