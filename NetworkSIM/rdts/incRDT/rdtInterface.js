@@ -1,4 +1,4 @@
-exports.init = function() {
+exports.init = function(networkIterator, deviceIterator) {
   // To be implemented
 };
 
