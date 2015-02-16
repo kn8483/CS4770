@@ -35,7 +35,7 @@ function removeApp(appName) {
 
 function addNetwork(networkName, networkKind) { // to Simulation
 	var n = new nt.Network(networkName, networkKind);
-	ncoll.insert(n);
+	ncoll.insert(n); // add _id field, mapped to an ObjectId object, into a new Network object, and inserts in the table
 }
 
 function removeNetwork(name) { // from Simulation
@@ -44,9 +44,20 @@ function removeNetwork(name) { // from Simulation
 	});
 }
 
+/**
+ * IMPORTANT: 
+ * When mongo inserts the device in the devices table, it ADDS an _id attribute.
+ * The VALUE of that attribute is an object called an ObjectID. 
+ * That ObjectID has a unique hexadecimal string representation (generated using
+ * the time of insertion, some random elements, etc.)
+ * It is this hexadecimal string that we will use as "tokens" for registering 
+ * with the simulation.
+ * The string is accessible through the ObjectId's 'str' attribute (which can be accessed
+ * directly, or returned by the valueOf() method). 
+ */
 function addDevice(deviceName) { // to Simulation
 	var d = new nt.Device(deviceName);
-	dcoll.insert(d);
+	dcoll.insert(d); // add _id field, mapped to an ObjectId object, into a new Device object, and inserts in the table
 }
 
 function removeDevice(name) { // from Simulation

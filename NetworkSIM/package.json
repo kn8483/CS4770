@@ -12,5 +12,6 @@
     "body-parser":"latest",
     "method-override":"latest",
     "mongojs":"latest"
+    "express-mailer":"latest"
   }
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+  <head>  	
+    <title>Device Registration</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src = '/js/registration.js'></script>
+  </head>
+  
+  <body>
+		Enter the unique token you received by e-mail: 
+		<input id="token" type="text">
+		<input value="Register" type="button" onclick="registerButtonClickHandler()"/>
+  </body>
+  
+</html>

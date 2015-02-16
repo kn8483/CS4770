@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>  	
+    <title>{{ subject }}</title>
+    <meta http-equiv = 'Content-Type' content='text/html; charset=UTF-8') </meta>
+  </head>
+  <body>
+    <p> You are invited to participate in the <b>Network Simulation</b>. </p>
+    <p> You may register your device at {{ registerURL }} <p>
+    <p> Your unique identifier is <em>{{ token }}</em> </p>
+  </body>
+</html>

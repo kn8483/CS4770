@@ -110,6 +110,7 @@ function Device(deviceName) {
 	// Construct a device object
 
 	this.deviceName = deviceName;
+	this.assigned = false;
 
 	this.joinNetwork = function(network) {
 		admin.addDeviceToNetwork(network, this);
