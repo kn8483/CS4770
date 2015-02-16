@@ -1,5 +1,6 @@
 var nt = require('./network_topology');
-var db = mongojs('simdb');
+var mongo = require("mongojs");
+var db = mongo('simdb');
 var ncoll = db.collection('networks');
 var dcoll = db.collection('devices');
 
@@ -112,7 +113,7 @@ function removeDeviceFromCurrentNetwork(device) {
 	var n = ncoll.find({ deviceList : { $in : [device] } }); 
 	dcoll.update(
 			{deviceName : device.deviceName}, 
-			{ $set : { previousNetwork : n }
+			{ $set : { previousNetwork : n }}
 			); 	
 	ncoll.update(
 			{ deviceList: { $in : [device] } },			
@@ -124,7 +125,7 @@ function returnDeviceToPreviousNetwork(device) {
 	var pn = device.previousNetwork;  
 	ncoll.update(
 			{ networkName : pn.networkName }, 
-			{ $addToset : { deviceList : device }
+			{ $addToset : { deviceList : device }}
 			); 	
 }
 

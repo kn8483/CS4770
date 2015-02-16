@@ -2,7 +2,8 @@
 
 var nt = require('./network_topology');
 var admin = require('./admin');
-var db = mongojs('simdb');
+var mongo = require("mongojs");
+var db = mongo('simdb');
 var ncoll = db.collection('networks');
 var dcoll = db.collection('devices');
 var app = require('../app').app; // use app.mailer to send e-mail
@@ -61,7 +62,7 @@ function distributeToken(emailAddress) {
 		bcc : 'db2763@mun.ca, kn8384@mun.ca, xx1100@mun.ca',
 		subject : 'Network Simulation Registration', // REQUIRED.
 		registerURL : 'http://sc-4.cs.mun.ca/register', // for Hogan!
-		token : hexstring
+		token : hexstring //for Hogan
 	}, function(err) {
 		if (err) {
 			console.log('There was an error sending the token e-mail');

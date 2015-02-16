@@ -18,7 +18,7 @@ var morgan = require('morgan');// formerly logger
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
 var mongo = require("mongojs");
-var mailer = require('express-mailer'); // added to distribute token by e-mail
+var expressMail = require('express-mail'); // added to distribute token by e-mail
 										// in registerMobileDevice
 
 var app = express();
@@ -41,7 +41,7 @@ if ('development' === app.get('env')) {
 }
 // Copied and pasted from express-mailer example
 // Might need to adjust
-mailer.extend(app, {
+expressMail.extend(app, {
 	  from: 'no-reply@example.com',
 	  host: 'smtp.gmail.com', // hostname
 	  secureConnection: true, // use SSL
@@ -67,7 +67,7 @@ app.post('/addNetworkToSimulation', function (req, res) {
 });
 app.post('/removeNetworkFromSimulation', function (req, res) {
 	admin.removeNetwork(req.body.networkName); 
-	res.status(200).;
+	res.status(200);
 	res.end(); 
 });
 app.post('/addDeviceToSimulation', function (req, res) {
