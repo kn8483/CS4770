@@ -1,3 +1,11 @@
+window.onload = function() {
+	if ((!isAdministrator())) {
+		alert("No valid stored username/password detected. You must be a Simulation "
+				+ "administrator to access this page. You will be redirected to the "
+				+ "index page.");
+		window.location.replace("http://sc-4.cs.mun.ca/");
+};
+
 // ---------------- Input Fields ------------------------------
 var importRdtName = document.getElementById("importRdtName");
 var removeRdtName = document.getElementById("removeRdtName");

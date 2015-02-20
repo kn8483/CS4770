@@ -1,4 +1,13 @@
-window.onload = counterAppOnloadFunction;
+window.onload = function() {
+	if ((!isRegisteredUser()) && (!isAdministrator())) {
+		alert("No valid token detected. This device must be registered with the "
+				+ "Simulation to run this application. You will be redirected to the "
+				+ "index page.");
+		window.location.replace("http://sc-4.cs.mun.ca/");
+	} else {
+		counterAppOnloadFunction();
+	}
+};
 
 function sendPostRequest(data, url) {
 	var request = new XMLHttpRequest();

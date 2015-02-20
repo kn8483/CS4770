@@ -14,46 +14,18 @@ $(function() {
 
 // -------------------------------------------------------------------------
 
-window.onload = checkTokenInLocalStorage;
-
-function checkTokenInLocalStorage() {
-	var token = localStorage.getItem("token");
-
-	if (token) {
-
-		var valid = validateToken(token);
-
-		if (valid) {
-			alert("Welcome back to the Simulation! Your token has been detected. You will"
-					+ "be redirected to the User Home Page.");
-			window.location.replace("http://sc-4.cs.mun.ca/userHome.hjs");
-		}
-
-		else {
-			console
-					.log("There is a token in local storage and a request was sent"
-							+ " to the server to validate it, but that request returned false.");
-		}
-
+window.onload = function() {
+	if (isAdministrator()) {
+		alert("Welcome back, Administrator. Stored username/password authenticated. You will"
+				+ " be redirected to the Admin Home Page.");
+		window.location.replace("http://sc-4.cs.mun.ca/adminHome");
 	}
-}
 
-function validateToken(token) {
-
-	var url = "http://sc-4.cs.mun.ca/validateToken";
-
-	var request = new XMLHttpRequest();
-	request.open("POST", url);
-	request.onload = function() {
-		if (request.status === 200) {
-			return true;
-		}
-
-		else if (request.status === 400) {
-			return false;
-		}
+	else if (isRegisteredUser()) {
+		alert("Welcome back to the Simulation! Your token has been detected. You will"
+				+ "be redirected to the User Home Page.");
+		window.location.replace("http://sc-4.cs.mun.ca/userHome");
 	}
-	request.send(token);
 }
 
 function registerButtonClickHandler() {
@@ -78,4 +50,17 @@ function registerButtonClickHandler() {
 	}
 	request.send(token);
 
+}
+
+function adminLoginButtonClickHandler() {
+	var username = document.getElementById("username_field").value;
+	var password = document.getElementById("password_field").value;
+	var authenticated = adminLogin(username, password);
+	if (authenticated) {
+		localStorage.setItem("username", username);
+		localStorage.setItem("password", password);
+		window.location.assign("http://sc-4.cs.mun.ca/adminHome");
+	} else {
+		alert("Invalid username/password combo.");
+	}
 }
