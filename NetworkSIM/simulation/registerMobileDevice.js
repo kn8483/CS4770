@@ -6,7 +6,12 @@ var mongo = require("mongojs");
 var db = mongo('simdb');
 var ncoll = db.collection('networks');
 var dcoll = db.collection('devices');
+var acoll = db.collection('administrators');
 var app = require('../app').app; // use app.mailer to send e-mail
+
+acoll.insert(new nt.Administrator("fiech", "encapsulation")); // the only
+// administrator
+// !
 
 /**
  * 1. Get reference to one unassigned device 2. Get that device's token (id) 3.
@@ -93,6 +98,18 @@ function validateToken(token) {
 	return valid;
 }
 
+function adminLogin(uName, pWord) {
+	var doc = acoll.findOne({
+		username : uName,
+		password : pWord
+	});
+	if (doc)
+		return true;
+	else
+		return false;
+}
+
 exports.registerWithToken = registerWithToken;
 exports.distributeToken = distributeToken;
 exports.validateToken = validateToken;
+exports.adminLogin = adminLogin;

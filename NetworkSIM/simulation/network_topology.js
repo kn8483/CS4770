@@ -1,7 +1,12 @@
-var networkList; // won't use
-var deviceList; // won't use
+var networkList; // won't use, using mongo
+var deviceList; // won't use, using mongo
 
 var admin = require('./admin');
+
+function Administrator(username, password) {
+	this.username = username;
+	this.password = password;
+}
 
 // we can use admin.ncoll.find(); will return a CURSOR for all networks
 function NetworkIterator() {
@@ -51,30 +56,31 @@ function DeviceIterator() {
 		networkName : this.networkName
 	}); // findOne returns a document instead of a cursor
 
-	var deviceList = thisNetwork.deviceList; 
-	var currentIndex = 0; 
-	
+	var deviceList = thisNetwork.deviceList;
+	var currentIndex = 0;
+
 	this.first = function() {
-		return deviceList[0]; 
+		return deviceList[0];
 	};
 
 	this.next = function() {
 		var oldIndex = currentIndex;
 		currentIndex = currentIndex + 1;
-		return deviceList[oldIndex]; 
+		return deviceList[oldIndex];
 	};
 
 	this.hasNext = function() {
-		return currentIndex < deviceList.length; 
+		return currentIndex < deviceList.length;
 	};
 
 	this.reset = function() {
-		currentIndex = 0; 
+		currentIndex = 0;
 	};
 
 	this.each = function(callback) {
-		for (var item = this.first(); this.hasNext(); item = this.next()) { 
-			callback(item); }
+		for (var item = this.first(); this.hasNext(); item = this.next()) {
+			callback(item);
+		}
 	};
 }
 
@@ -135,6 +141,7 @@ function Device(deviceName) {
 	};
 }
 
+exports.Administrator = Administrator;
 exports.Network = Network;
 exports.Device = Device;
 exports.NetworkIterator = NetworkIterator;
