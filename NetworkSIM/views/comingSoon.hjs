@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Coming Soon</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/comingSoon.css"></link>
+	<script type="text/javascript" src="SOME_JAVASCRIPT_FILE.js"></script>
+</head>
+<body>	
+	<div id="UnderConstruction">
+		<div id="Banner">			
+			Page Under Construction !
+		</div>
+		<img src="underConstruction.jpg""/>
+	</div>
+</body>
+</html>

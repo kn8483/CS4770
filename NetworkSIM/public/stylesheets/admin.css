@@ -1,0 +1,60 @@
+#AdminHome{
+	width: 100%;
+	min-width: 1349px;
+	height: 100%;
+	min-height: 1370px;
+	display: block;
+	position: absolute;
+	margin: -8px 0 0 -8px;
+	background: #336699;
+}
+	#Banner{
+		height: 60px;
+		width: 96%;
+		min-width: 1100px;
+		position: absolute;
+		background: #383838;
+		left: 50%;
+		margin: 10px 0 0 -48.5%;
+		padding: 5px 0 5px 10px;
+		font-size: 50px;
+		font-weight: 900;
+		color: #E8E8E8;
+	}
+	#ViewWindow{
+		height: 88%;
+		width: 100%;
+		min-width: 800px;
+		max-width: 1130px;
+		position: absolute;
+		background: none;
+		margin: 91px 500px 0 195px;
+	}
+ul{
+	position: absolute;
+	list-style-type: none;
+	margin: 90px 0 0 1.5%;
+	padding: 0;
+}
+a:link, a:visited{
+	display: block;
+	font-weight: bold;
+	color: #E8E8E8;
+	background-color: #383838;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	padding: 10px 4px 4px 4px;
+	border: 1px solid #336699;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+a:hover, a:active{
+	background-color: #484848;
+}
+div h1{
+	color: #E8E8E8;
+	text-align: center;
+	margin-top: 50px;
+	font-size: 40px;
+}
