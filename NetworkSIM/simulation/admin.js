@@ -3,7 +3,6 @@ var mongo = require("mongojs");
 var db = mongo('simdb');
 var ncoll = db.collection('networks');
 var dcoll = db.collection('devices');
-var nt = require('./network_topology');
 
 function importRDT(rdtName) {
 	// Import a replicated data type to use in the simulation

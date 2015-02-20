@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Network Settings</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/networkSettings.css">
-	<script src="/js/network_settings.js" type="text/javascript"></script>
+	<script src="/js/networkSettings_clientside.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="NetworkSettings" >

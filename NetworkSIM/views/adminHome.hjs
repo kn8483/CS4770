@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>AppSim 2.0</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"></link>
-	<script type="text/javascript" src="/js/admin.js"></script>
+	<script type="text/javascript" src="/js/adminHome_clientside.js"></script>
 </head>
 <body>	
 	<div id="AdminHome">

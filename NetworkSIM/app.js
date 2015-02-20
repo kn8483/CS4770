@@ -15,6 +15,7 @@ var indexroutes = require('./routes/index_routes');
 var userroutes = require('./routes/user');
 var nsroutes = require('./routes/network_settings_routes');
 var rmdroutes = require('./routes/registerMobileDevice_routes');
+var cApproutes = require('./routes/counterApp_routes');
 
 // ------------------- SET UP ------------------------------
 
@@ -80,6 +81,11 @@ app.post('/returnDeviceToPreviousNetwork',
 app.post('/distributeToken', rmdroutes.distributeTokenRoute);
 app.post('/registerWithToken', rmdroutes.registerWithTokenRoute);
 app.post('/validateToken', rmdroutes.validateTokenRoute);
+
+// counter app
+app.get("/counterApp", cApproutes.counterAppRoute);
+app.post("/increment", cApproutes.incrementRoute);
+app.post("/decrement", cApproutes.decrementRoute);
 
 // ----------------------- SERVER --------------------------------------
 
