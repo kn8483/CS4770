@@ -26,7 +26,7 @@ function checkTokenInLocalStorage() {
 		if (valid) {
 			alert("Welcome back to the Simulation! Your token has been detected. You will"
 					+ "be redirected to the User Home Page.");
-			window.location.replace("http://sc-4.cs.mun.ca/user.hjs");
+			window.location.replace("http://sc-4.cs.mun.ca/userHome.hjs");
 		}
 
 		else {

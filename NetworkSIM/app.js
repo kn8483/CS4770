@@ -11,7 +11,7 @@ var mongo = require("mongojs");
 var expressMail = require('express-mail'); // NOT WORKING
 
 // route modules
-var indexroutes = require('./routes/index');
+var indexroutes = require('./routes/index_routes');
 var userroutes = require('./routes/user');
 var nsroutes = require('./routes/network_settings_routes');
 var rmdroutes = require('./routes/registerMobileDevice_routes');
@@ -54,6 +54,8 @@ expressMail.extend(app, {
 // -------------------- ROUTING ----------------------------
 
 app.get('/', indexroutes.indexRoute);
+app.get('/userHome', indexroutes.userHomeRoute);
+app.get('/adminHome', indexroute.adminHomeRoute);
 app.get('/users', userroutes.list);
 
 // network_settings
