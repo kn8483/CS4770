@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>  	
+    <title>Counter App</title>
+    <meta http-equiv = 'Content-Type' content='text/html; charset=UTF-8') </meta>
+    <script src="/js/counterApp.js"> </script>
+  </head>
+  <body>
+  	<h1>Counter App</h1>
+    <p> Local Count: <em><span id="lc_span"></span></em> {{localCount}} </p>
+    <p> Global Count: <em><span id="gc_span"></span></em> {{globalCount}} <p>
+    <button onclick="incrementButtonHandler()">+</button>
+    <button onclick="decrementButtonHandler()">-</button>
+  </body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>AppSim 2.0</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/admin.css"></link>
-	<script type="text/javascript" src="js/admin.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"></link>
+	<script type="text/javascript" src="/js/adminHome_clientside.js"></script>
 </head>
 <body>	
 	<div id="AdminHome">
@@ -13,7 +13,7 @@
 		</div>
 		<ul>
 			<li><a href="/networkSettings" onclick="load_networkSettings()">Network Settings</a></li>
-			<li><a href="/tokenDelivery" onclick="load_tokenDelivery()">Distribute Tokens</a></li>
+			<li><a href="/distributeToken" onclick="load_tokenDelivery()">Distribute Tokens</a></li>
 			<li><a href="/networkTopology" onclick="load_comingSoon()">Network Topology</a></li>
 			<li><a href="/apps" onclick="load_comingSoon()">Apps</a><li>
 			<li><a href="/logger" onclick="load_comingSoon()">Logger</a></li>
