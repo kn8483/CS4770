@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>Network Settings</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/networkSettings.css">
-	<script src="network_settings.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/networkSettings.css">
+	<script src="../public/network_settings.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="NetworkSettings" >
@@ -22,28 +22,28 @@
 			<div id="LeftBox">
 				<h3>Import RDT</h3>
 				<label>RDT Name:</label><input type="text" id="importRdtName">
-				<button id="importRDTButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Import</button>
+				<button id="importRDTButton" type="button" onclick="importRdtClickHandler()" style="margin-top:2px;">Import</button>
 			</div>
 			
 <!-- REMOVE RDT -->
 			<div id="RightBox">
 				<h3>Remove RDT</h3>
 				<label>RDT Name:</label><input type="text" id="removeRdtName">
-				<button id="removeRDTButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Remove</button>
+				<button id="removeRDTButton" type="button" onclick="removeRdtClickHandler()" style="margin-top:2px;">Remove</button>
 			</div>
 			
 <!-- IMPORT APP -->
 			<div id="LeftBox">
 				<h3>Import App</h3>
 				<label>App Name:</label><input type="text" id="importAppName">
-				<button id="importAppButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Import</button>
+				<button id="importAppButton" type="button" onclick="importAppClickHandler" style="margin-top:2px;">Import</button>
 			</div>
 			
 <!-- REMOVE APP -->
 			<div id="RightBox">
 				<h3>Remove App</h3>
 				<label>App Name:</label><input type="text" id="removeAppName">
-				<button id="removeAppButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Remove</button>
+				<button id="removeAppButton" type="button" onclick="removeAppClickHandler()" style="margin-top:2px;">Remove</button>
 			</div>
 			
 <!-- ADD NETWORK -->
@@ -51,43 +51,43 @@
 				<h3>Add Network</h3>
 				<form>
 					<label style="width:110px;">Network Name:</label><input type="text" id="addNetworkName"><br>
-					<label style="width:110px;">Network Kind:</label><select id="AddNetworkKind" style="width:128px; height:26px; margin-left:5px; text-align:center; font-size:20px; padding-left: 5px;">
+					<label style="width:110px;">Network Kind:</label><select id="addNetworkKind" style="width:128px; height:26px; margin-left:5px; text-align:center; font-size:20px; padding-left: 5px;">
 											<option>-------------</option>
-											<option>wifi</option>
-											<option>gsn</option>
+											<option>Wi-Fi</option>
+											<option>GSM</option>
 										</select>					
 				</form>
-				<button id="addNetworkButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Add</button>
+				<button id="addNetworkButton" type="button" onclick="addNetworkClickHandler()" style="margin-top:2px;">Add</button>
 			</div>
 			
 <!-- REMOVE NETWORK -->
 			<div id="RightBox" style="height:180px;">
 				<h3>Remove Network</h3>
 				<label>Network Name:</label><input type="text" id="removeNetworkName">
-				<button id="removeNetworkButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:40px;">Remove</button>
+				<button id="removeNetworkButton" type="button" onclick="removeNetworkClickHandler()" style="margin-top:40px;">Remove</button>
 			</div>
 			
 <!-- ADD DEVICE -->
 			<div id="LeftBox">
 				<h3>Add Device</h3>
 				<label>Device Name:</label><input type="text" id="addDeviceName">
-				<button id="addDeviceButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Add</button>
+				<button id="addDeviceButton" type="button" onclick="addDeviceClickHandler()" style="margin-top:2px;">Add</button>
 			</div>
 			
 <!-- REMOVE DEVICE -->
 			<div id="RightBox">
 				<h3>Remove Device</h3>
 				<label>Device Name:</label><input type="text" id="removeDeviceName">
-				<button id="removeDeviceButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Add</button>
+				<button id="removeDeviceButton" type="button" onclick="removeDeviceClickHandler()" style="margin-top:2px;">Add</button>
 			</div>
 			
 <!-- ADD DEVICE TO NETWORK -->
 			<div id="LeftBox" style="height:160px;">
 				<h3>Add Device To Network</h3>
 				<form>				
-					<label style="width:110px;">Network Name:</label><input type="text" id="addDeviceNetworkNetorkName"><br>
+					<label style="width:110px;">Network Name:</label><input type="text" id="addDeviceToNetworkNetworkName"><br>
 					<label style="width:110px;">Device Name:</label><input type="text" id="addDeviceToNetworkDeviceName"><br>
-					<button id="addDeviceButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Add</button>
+					<button id="addDeviceToButton" type="button" onclick="addDeviceToNetworkClickHandler()" style="margin-top:2px;">Add</button>
 				</form>
 			</div>
 			
@@ -97,37 +97,37 @@
 				<form>
 					<label style="width:110px">Network Name:</label><input type="text" id="removeDeviceFromNetworkNetworkName"><br>
 					<label style="width:110px">Device Name:</label><input type="text" id="removeDeviceFromNetworkDeviceName"><br>
-					<button id="removeDeviceButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Remove</button>
+					<button id="removeDeviceToButton" type="button" onclick="removeDeviceFromNetworkClickHandler()" style="margin-top:2px;">Remove</button>
 				</form>
 			</div>
 			
 <!--- CONNECT TWO NETWORKS -->
 			<div id="LeftBox" style="height: 160px;">
 				<h3>Connect 2 Networks</h3>
-				<label>Network 1:</label><input type="text" id="ConnectNetwork1Name"><br>
-				<label>Network 2:</label><input type="text" id="ConnectNetwork2Name">
-				<button id="Connect2NetworksButton" type="button" onclick="SOME_FUNCTION()" style="margin-top:2px;">Connect</button>
+				<label>Network 1:</label><input type="text" id="connectNetwork1Name"><br>
+				<label>Network 2:</label><input type="text" id="connectNetwork2Name">
+				<button id="Connect2NetworksButton" type="button" onclick="connectNetworksClickHandler()" style="margin-top:2px;">Connect</button>
 			</div>
 			
 <!-- DISCONNECT TWO NETWORKS -->
 			<div id="RightBox" style="height: 160px;">
 				<h3>Disconnect 2 Networks</h3>
-				<label>Network 1:</label><input type="text" id="DisconnectNetwork1Name"><br>
-				<label>Network 2:</label><input type="text" id="DisconnectNetwork2Name">
-				<button id="Disconnect2NetworksButton" type="button" onclick="SOME_FUNCTION()" style="margin-top:2px;">Disconnect</button>
+				<label>Network 1:</label><input type="text" id="disconnectNetwork1Name"><br>
+				<label>Network 2:</label><input type="text" id="disconnectNetwork2Name">
+				<button id="Disconnect2NetworksButton" type="button" onclick="disconnectNetworksClickHandler()" style="margin-top:2px;">Disconnect</button>
 			</div>
 			
 <!-- REMOVE DEVICE FROM CURRENT NETWORK -->
 			<div id="LeftBox" style="height: 160px;">
 				<h3>Remove Device From Current Network</h3>
 				<label>Device Name:</label><input type="text" id="removeDeviceFromCurrentNetworkDeviceName">
-				<button id="removeDeviceFromCurrentNetworkButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:2px;">Add</button>
+				<button id="removeDeviceFromCurrentNetworkButton" type="button" onclick="removeDeviceFromCurrentClickHandler()" style="margin-top:2px;">Add</button>
 			</div>
 <!-- RETURN DEVICE TO PREVIOUS NETWORK -->
 			<div id="RightBox" style="height: 160px;">
 				<h3>Return Device To Previous Network</h3>
 				<label>Device Name:</label><input type="text" id="returnDeviceToPreviousNetworkDeviceName">
-				<button id="returnDeviceToPreviousNetworkButton" type="button" onclick="SOME_FUCNTION()" style="margin-top:5px;">Add</button>
+				<button id="returnDeviceToPreviousNetworkButton" type="button" onclick="returnDeviceFromPreviousHandler()" style="margin-top:5px;">Add</button>
 			</div>
 		</div>
 		<div id="RightFrame">

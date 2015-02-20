@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Welcome to AppSim</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/index.css"></link>
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/index.css"></link>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script src="js/index.js"></script>
+	<script src="../public/js/index.js"></script>
 </head>
 <body>	
 	<div id="Login">
@@ -29,8 +29,8 @@
 			<h1>Register Your Device</h1>
 			<form>
 				<h3>Enter the token that you received via email:</h3>
-				<input type="token" placeholder="Enter token"/>
-				<a href="user.hjs" style="text-decoration:none;"><button type="button" id="UserRegisterButton">Register</button></a>
+				<input type="text" id="token_input" placeholder="Enter token"/>
+				<button type="button" id="UserRegisterButton" onclick="registerButtonClickHandler()">Register</button>
 		</div>
 	</div>
 </body>
