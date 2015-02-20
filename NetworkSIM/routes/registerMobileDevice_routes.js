@@ -1,4 +1,4 @@
-var registerMobileDevice = require('../simulation/registerMobileDevice');
+var registerMobileDevice = require('./simulation/registerMobileDevice');
 
 exports.distributeTokenRoute = function(req, res) {
 	registerMobileDevice.distributeToken(req.body.emailAddress);
@@ -19,7 +19,19 @@ exports.registerWithTokenRoute = function(req, res) {
 
 exports.validateTokenRoute = function(req, res) {
 	var valid = registerMobileDevice.validateToken(req.body.token);
-	if (success) {
+	if (valid) {
+		res.status(200);
+		res.end();
+	} else {
+		res.status(400);
+		res.end();
+	}
+}
+
+exports.adminLoginRoute = function(req, res) {
+	var valid = registerMobileDevice.adminLogin(req.body.username,
+			req.body.password);
+	if (valid) {
 		res.status(200);
 		res.end();
 	} else {
