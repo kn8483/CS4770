@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>AppSim 2.0</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/admin.css"></link>
-	<script type="text/javascript" src="js/admin.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"></link>
+	<script type="text/javascript" src="/js/admin.js"></script>
 </head>
 <body>	
 	<div id="AdminHome">
