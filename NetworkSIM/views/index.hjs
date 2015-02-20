@@ -21,7 +21,7 @@
 				<h3>Enter administrator credentials:</h3>
 				<input type="userName" placeholder="Username"/>
 				<input type="password" placeholder="Password"/>
-				<a href="admin.hjs" style="text-decoration:none"><button type="button" id="AdminLoginButton">Log In</button></a>		
+				<a href="adminHome" style="text-decoration:none"><button type="button" id="AdminLoginButton">Log In</button></a>		
 			</form>
 		</div>
 		<div style="display:none" id="RegisterForm">

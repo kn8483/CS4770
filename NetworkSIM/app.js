@@ -69,7 +69,7 @@ transporter.sendMail(mailOptions, function(error, info){
 
 
 
-app.get('/', indexroutes.adminHomeRoute);
+app.get('/', indexroutes.indexRoute);
 app.get('/users', indexroutes.userHomeRoute);
 
 // Move callbacks to routes
@@ -133,7 +133,7 @@ app.get('/', indexroutes.indexRoute);
 app.get('/userHome', indexroutes.userHomeRoute);
 app.get('/adminHome', indexroutes.adminHomeRoute);
 app.get('/users', userroutes.list);
-
+app.get('/networkSettings', indexroutes.networkSettings);
 // network_settings
 app.post('/importRDT', nsroutes.importRDTRoute);
 app.post('/removeRDT', nsroutes.removeRDTRoute);
