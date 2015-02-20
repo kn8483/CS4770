@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/index.css"></link>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="/js/index_clientside.js"></script>
+	<script type="text/javascript" src="/js/onload_functions.js"></script>
 </head>
 <body>	
 	<div id="Login">
@@ -19,9 +20,9 @@
 			<h1>Login</h1>
 			<form>
 				<h3>Enter administrator credentials:</h3>
-				<input type="userName" placeholder="Username"/>
-				<input type="password" placeholder="Password"/>
-				<a href="adminHome" style="text-decoration:none"><button type="button" id="AdminLoginButton">Log In</button></a>		
+				<input type="text" id="username_field" placeholder="Username"/>
+				<input type="text" id= "password_field" placeholder="Password"/>
+				<button type="button" id="AdminLoginButton" onclick="adminLoginButtonClickHandler()">Log In</button>		
 			</form>
 		</div>
 		<div style="display:none" id="RegisterForm">

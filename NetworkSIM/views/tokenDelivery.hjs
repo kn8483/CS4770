@@ -5,6 +5,7 @@
 	<title>Token Management</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/tokenDelivery.css">
 	<script src="SOME_JAVASCRIPT_FILE.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/js/onload_functions.js"></script>
 </head>
 
 <body>

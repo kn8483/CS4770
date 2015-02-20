@@ -4,6 +4,7 @@
     <title>Counter App</title>
     <meta http-equiv = 'Content-Type' content='text/html; charset=UTF-8') </meta>
     <script src="/js/counterApp.js"> </script>
+	<script type="text/javascript" src="/js/onload_functions.js"></script>
   </head>
   <body>
   	<h1>Counter App</h1>
