@@ -18,7 +18,7 @@ var morgan = require('morgan');// formerly logger
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
 var mongo = require("mongojs");
-var expressMail = require('express-mail'); // added to distribute token by e-mail
+var nodemailer = require("nodemailer"); // added to distribute token by e-mail
 										// in registerMobileDevice
 
 var app = express();
@@ -41,18 +41,34 @@ if ('development' === app.get('env')) {
 }
 // Copied and pasted from express-mailer example
 // Might need to adjust
-expressMail.extend(app, {
-	  from: 'no-reply@example.com',
-	  host: 'smtp.gmail.com', // hostname
-	  secureConnection: true, // use SSL
-	  port: 465, // port for secure SMTP
-	  transportMethod: 'SMTP', // default is SMTP. Accepts anything that
-								// nodemailer accepts
-	  auth: {
-	    user: 'gmail.user@gmail.com',
-	    pass: 'userpass'
-	  }
-	});
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'gmail.user@gmail.com',
+        pass: 'userpass'
+    }
+});
+
+// NB! No need to recreate the transporter object. You can use
+// the same transporter object for all e-mails
+
+// setup e-mail data with unicode symbols
+var mailOptions = {
+    from: 'Fred Foo ✔ <foo@blurdybloop.com>', // sender address
+    to: 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers
+    subject: 'Hello ✔', // Subject line
+    text: 'Hello world ✔', // plaintext body
+    html: '<b>Hello world ✔</b>' // html body
+};
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        console.log(error);
+    }else{
+        console.log('Message sent: ' + info.response);
+    }
+});
 
 
 
