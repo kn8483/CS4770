@@ -54,7 +54,7 @@ function importRdtClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/importRDT";
+	var url = "http://" + window.location.host + "/importRDT";
 
 	sendPostRequest(data, url);
 }
@@ -65,7 +65,7 @@ function removeRdtClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/removeRDT";
+	var url = "http://" + window.location.host + "/removeRDT";
 
 	sendPostRequest(data, url);
 }
@@ -76,7 +76,7 @@ function importAppClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/importApp";
+	var url = "http://" + window.location.host + "/importApp";
 
 	sendPostRequest(data, url);
 }
@@ -87,7 +87,7 @@ function removeAppClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/removeApp";
+	var url = "http://" + window.location.host + "/removeApp";
 
 	sendPostRequest(data, url);
 }
@@ -100,7 +100,7 @@ function addNetworkClickHandler() {
 		"networkKind" : networkKind
 	};
 
-	var url = "http://sc-4.cs.mun.ca/addNetwork";
+	var url = "http://" + window.location.host + "/addNetwork";
 
 	sendPostRequest(data, url);
 }
@@ -111,7 +111,7 @@ function removeNetworkClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/removeNetwork";
+	var url = "http://" + window.location.host + "/removeNetwork";
 
 	sendPostRequest(data, url);
 }
@@ -122,7 +122,7 @@ function addDeviceClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/addDevice";
+	var url = "http://" + window.location.host + "/addDevice";
 
 	sendPostRequest(data, url);
 }
@@ -134,7 +134,7 @@ function removeDeviceClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/removeDevice";
+	var url = "http://" + window.location.host + "/removeDevice";
 
 	sendPostRequest(data, url);
 }
@@ -147,7 +147,7 @@ function addDeviceToNetworkClickHandler() {
 		"deviceName" : deviceName
 	};
 
-	var url = "http://sc-4.cs.mun.ca/addDeviceToNetwork";
+	var url = "http://" + window.location.host + "/addDeviceToNetwork";
 
 	sendPostRequest(data, url);
 }
@@ -160,7 +160,7 @@ function removeDeviceFromNetworkClickHandler() {
 		"deviceName" : deviceName
 	};
 
-	var url = "http://sc-4.cs.mun.ca/removeDeviceFromNetwork";
+	var url = "http://" + window.location.host + "/removeDeviceFromNetwork";
 
 	sendPostRequest(data, url);
 }
@@ -173,7 +173,7 @@ function connectNetworksClickHandler() {
 		"network2Name" : network2Name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/connectTwoNetworks";
+	var url = "http://" + window.location.host + "/connectTwoNetworks";
 
 	sendPostRequest(data, url);
 }
@@ -186,7 +186,7 @@ function disconnectNetworksClickHandler() {
 		"network2Name" : network2Name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/disconnectTwoNetworks";
+	var url = "http://" + window.location.host + "/disconnectTwoNetworks";
 
 	sendPostRequest(data, url);
 }
@@ -197,7 +197,7 @@ function removeDeviceFromCurrentClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/removeDeviceFromCurrentNetwork";
+	var url = "http://" + window.location.host + "/removeDeviceFromCurrentNetwork";
 
 	sendPostRequest(data, url);
 }
@@ -208,7 +208,7 @@ function returnDeviceFromPreviousHandler() {
 		"name" : name
 	};
 
-	var url = "http://sc-4.cs.mun.ca/returnDeviceToPreviousNetwork";
+	var url = "http://" + window.location.host + "/returnDeviceToPreviousNetwork";
 
 	sendPostRequest(data, url);
 }

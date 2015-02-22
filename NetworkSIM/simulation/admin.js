@@ -1,6 +1,8 @@
 var nt = require('./network_topology');
-var mongo = require("mongojs");
-var db = mongo('simdb');
+var mongo = require("mongodb").Db,                                  //<---------------------***
+		 MongoClient = require('mongodb').MongoClient,           //<---------------------***
+		 Server = require('mongodb').Server;                     //<---------------------***
+var db = new mongo('test', new Server('localhost', 27017));         //<---------------------***
 var ncoll = db.collection('networks');
 var dcoll = db.collection('devices');
 

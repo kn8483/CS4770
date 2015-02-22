@@ -13,7 +13,7 @@ function isRegisteredUser() {
 
 function validateToken(token) {
 
-	var url = "http://sc-4.cs.mun.ca/validateToken";
+	var url = "http://" + window.location.host + "/validateToken";
 
 	var request = new XMLHttpRequest();
 	request.open("POST", url);
@@ -47,7 +47,7 @@ function isAdministrator() {
 
 function adminLogin(username, password) {
 
-	var url = "http://sc-4.cs.mun.ca/adminLogin";
+	var url = "http://" + window.location.host + "/adminLogin";
 
 	var request = new XMLHttpRequest();
 	request.open("POST", url);

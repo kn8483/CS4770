@@ -32,7 +32,7 @@ function registerButtonClickHandler() {
 
 	var token = document.getElementById("token_input").value;
 
-	var url = "http://sc-4.cs.mun.ca/registerWithToken";
+	var url = "http://" + window.location.host + "/registerWithToken";
 
 	var request = new XMLHttpRequest();
 	request.open("POST", url);

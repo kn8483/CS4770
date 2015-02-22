@@ -7,11 +7,17 @@ var path = require('path');
 var morgan = require('morgan'); // formerly logger
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
-var mongo = require("mongojs");
+var mongojs = require("mongojs");
+		//MongoClient = require('mongojs').MongoClient,
+		//Server = require('mongojs').Server;
+		
+var db = mongojs("simdb", ["networks", "devices", "administrators"]);
 var nodemailer = require("nodemailer");
+var errorhandler = require("errorhandler");
 
 // route modules
 var indexroutes = require('./routes/index_routes');
+var adminroutes = require('./routes/admin_routes');
 var userroutes = require('./routes/user');
 var nsroutes = require('./routes/network_settings_routes');
 var rmdroutes = require('./routes/registerMobileDevice_routes');
@@ -28,12 +34,39 @@ app.use(morgan("dev")); // (formerly known as 'logger')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
-app.use(app.router);
+//app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 // development only
 if ('development' === app.get('env')) {
-	app.use(express.errorHandler());
+	app.use(errorhandler());
 }
+
+// ---------------------- DATABASE -----------------------
+
+var nt = require('./simulation/network_topology.js');
+/*
+var db = mongojs('db', new Server('localhost', 27017));
+var networks = db.collection('networks');
+var devices = db.collection('devices');
+var administrators = db.collection('administrators');
+*/
+var f = new nt.Administrator("fiech", "encapsulation"); 
+if (f) {
+	console.log("f exists. f.username = " + f.username + ", f.password = " + f.password); 
+}
+db.administrators.insert(f, function(err, doc){
+	console.log(doc);
+});
+var fFromCollection = db.administrators.find({username:"fiech"}, function(err, doc){
+	console.log(doc);
+});
+/*
+if (fFromCollection) {
+	console.log("fFromCollection exists. fFromCollection.next() = " + fFromCollection.next());
+	//console.log(fFromCollection); 
+}
+else { console.log("fFromCollection does not exist"); }
+*/
 
 // Copied and pasted from express-mailer example
 // Might need to adjust
@@ -69,8 +102,10 @@ transporter.sendMail(mailOptions, function(error, info) {
 // -------------------- ROUTING ----------------------------
 app.get('/', indexroutes.indexRoute);
 app.get('/userHome', indexroutes.userHomeRoute);
-app.get('/adminHome', indexroute.adminHomeRoute);
+app.get('/adminHome', indexroutes.adminHomeRoute);
 app.get('/users', userroutes.list);
+app.get('/networkSettings', adminroutes.networkSettingsRoute);
+app.get('/tokenDelivery', adminroutes.tokenDeliveryRoute);
 
 // network_settings
 app.post('/importRDT', nsroutes.importRDTRoute);

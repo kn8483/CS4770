@@ -5,6 +5,7 @@
 	<title>AppSim 2.0</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/user.css"></link>
 	<script type="text/javascript" src="/js/userHome_clientside.js"></script>
+	<script type="text/javascript" src="/js/onload_functions.js"></script>
 </head>
 <body>	
 	<div id="UserHome">

@@ -29,7 +29,7 @@ function incrementButtonHandler() {
 
 	// To update database
 	var token = localStorage.getItem("token");
-	var url = "http://sc-4.cs.mun.ca/increment";
+	var url = "http://" + window.location.host + "/increment";
 	var data = {
 		"token" : token
 	};

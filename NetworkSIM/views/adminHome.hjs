@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>AppSim 2.0</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"></link>
-	<script type="text/javascript" src="/js/admin_clientside.js"></script>
+	<script type="text/javascript" src="/js/adminHome_clientside.js"></script>
 	<script type="text/javascript" src="/js/onload_functions.js"></script>
 </head>
 <body>	
@@ -13,15 +13,15 @@
 			Administrator Home
 		</div>
 		<ul>
-			<li><a href = "./networkSettings" onclick="load_networkSettings()">Network Settings</a></li>
-			<li><a href="/distributeToken" onclick="load_tokenDelivery()">Distribute Tokens</a></li>
-			<li><a href="/networkTopology" onclick="load_comingSoon()">Network Topology</a></li>
-			<li><a href="/apps" onclick="load_comingSoon()">Apps</a><li>
-			<li><a href="/logger" onclick="load_comingSoon()">Logger</a></li>
-			<li><a href="/terminal" onclick="load_comingSoon()">Terminal</a></li>			
-			<li><a href="/developers" onclick="load_comingSoon()">Developers</a></li>
-			<li><a href="/messaging" onclick="load_comingSoon()">Messaging</a></li>
-			<li><a href="/properties" onclick="load_comingSoon()">Properties</a></li>			
+			<li><a href = "#" onclick="load_networkSettings()">Network Settings</a></li>
+			<li><a href="#" onclick="load_tokenDelivery()">Distribute Tokens</a></li>
+			<li><a href="#" onclick="load_comingSoon()">Network Topology</a></li>
+			<li><a href="#" onclick="load_comingSoon()">Apps</a><li>
+			<li><a href="#" onclick="load_comingSoon()">Logger</a></li>
+			<li><a href="#" onclick="load_comingSoon()">Terminal</a></li>			
+			<li><a href="#" onclick="load_comingSoon()">Developers</a></li>
+			<li><a href="#" onclick="load_comingSoon()">Messaging</a></li>
+			<li><a href="#" onclick="load_comingSoon()">Properties</a></li>			
 			<li><a href="/help" onclick="load_comingSoon()">Help</a><li>
 		</ul>
 		<div id="ViewWindow">

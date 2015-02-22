@@ -2,8 +2,10 @@
 
 var nt = require('./network_topology');
 var admin = require('./admin');
-var mongo = require("mongojs");
-var db = mongo('simdb');
+var mongo = require("mongodb").Db,
+		 MongoClient = require('mongodb').MongoClient,
+		 Server = require('mongodb').Server;
+var db = new mongo('test', new Server('localhost', 27017));
 var ncoll = db.collection('networks');
 var dcoll = db.collection('devices');
 var acoll = db.collection('administrators');
@@ -47,35 +49,27 @@ function distributeToken(emailAddress) {
 /**
  * Attempt to a find a device in the table whose id matches the token the user
  * has submitted --- see admin.addDevice comment for details. If found, set the
- * assigned attribute to true. Update returns a writeResult object. If a device
- * with this token was not found, the writeResult object's nModified field will
- * be 0.
+ * assigned attribute to true. 
  */
 function registerWithToken(token) {
-
-	var writeResult = dcoll.update({
-		"_id.str" : token,
-		assigned : false
-	}, // WHERE id == token and unassigned
-	{
-		$set : {
-			assigned : true
-		}
-	});
-
-	if (writeResult.nModified === 1) {
-		// inform router to send successful status code
-		// router will tell browser
-		// browser will run script to pop up alert store token
-		return true; // 
+	console.log('inside RegisterWithToken');
+	console.log('token = ' + token);
+	
+	var unassignedDeviceWithThisToken = dcoll.findOne({
+		"_id.string" : token,
+		//assigned : false
+	}); 
+	
+	if (unassignedDeviceWithThisToken) {
+		unassignedDeviceWithThisToken.assigned = true;
+		dcoll.save(unassignedDeviceWithThisToken);
+		return true; 
 	}
-
+	
 	else {
-		// inform router to send unsuccessful status code
-		// router will tell browser
-		// browser will pop up alert saying invalid token
 		return false;
-	}
+	} 
+	
 }
 
 function validateToken(token) {
@@ -99,6 +93,7 @@ function validateToken(token) {
 }
 
 function adminLogin(uName, pWord) {
+	console.log("inside adminLogin function inside simulation/registerMobileDevice.js ");
 	var doc = acoll.findOne({
 		username : uName,
 		password : pWord
