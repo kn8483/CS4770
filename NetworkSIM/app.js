@@ -6,7 +6,7 @@ var path = require('path');
 var morgan = require('morgan'); // formerly logger
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
-var db = require('mongojs').connect('mongodb', ['administrator']);
+var db = require('mongojs').connect('mongodb', ['administrators']);
 var nodemailer = require("nodemailer");
 var errorhandler = require("errorhandler");
 
@@ -54,7 +54,7 @@ db.administrators.ensureIndex( { email: 1 }, { unique: true } );
 var administrator1 = new administrator("cpgd76@mun.ca", "encapsulation");
 
 
-db.administrators.save(admininstrator1, function(err, savedAdmin){
+db.administrators.save(administrator1, function(err, savedAdmin){
 	if( err || !savedAdmin) console.log("Adminstrator " + administrator.email + " not saved because of error " + err);
 	else console.log("Administrator " + savedAdmin.email + " saved");
 });

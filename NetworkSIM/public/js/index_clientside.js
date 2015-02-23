@@ -56,6 +56,7 @@ function adminLoginButtonClickHandler() {
 	var username = document.getElementById("username_field").value;
 	var password = document.getElementById("password_field").value;
 	var administrator1 = new administrator(username, password);
+	/*
 	var authenticated = adminLogin(username, password);
 	if (authenticated) {
 		localStorage.setItem("username", username);
@@ -64,4 +65,15 @@ function adminLoginButtonClickHandler() {
 	} else {
 		alert("Invalid username/password combo.");
 	}
+	*/
+	db.administrators.find(administrator1, function(err, Admin){
+	if( err || !Admin.length){
+		console.log("Administraor " + administrator.email + " not found.")
+		alert(";
+	else administrators.forEach( function(administrator){
+		console.log("Administrator found! - " + administrator.email);
+		window.location.replace("http://sc-4.cs.mun.ca/adminHome");
+		var url = "http://" + window.location.host + "/adminHome";
+	} );
+});
 }

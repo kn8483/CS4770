@@ -14,7 +14,7 @@ var dcoll = db.collection('devices');
 var acoll = db.collection('administrators');
 var app = require('../app').app; // use app.mailer to send e-mail
 
-acoll.insert(new nt.Administrator("fiech", "encapsulation")); // the only
+//acoll.insert(new nt.Administrator("fiech", "encapsulation")); // the only
 // administrator
 // !
 
