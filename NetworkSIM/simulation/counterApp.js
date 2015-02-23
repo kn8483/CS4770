@@ -1,7 +1,10 @@
+var db = require('mongojs').connect('mongodb', ['apps']);
+/*
 var mongo = require("mongodb").Db,
 		 MongoClient = require('mongodb').MongoClient,
 		 Server = require('mongodb').Server;
 var db = new mongo('test', new Server('localhost', 27017));
+*/
 var ncoll = db.collection('networks');
 var dcoll = db.collection('devices');
 

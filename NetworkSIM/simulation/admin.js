@@ -1,10 +1,13 @@
 var nt = require('./network_topology');
+var db = require('mongojs').connect('mongodb', ['administrator'], ['networks'], ['devices']);
+/*
 var mongo = require("mongodb").Db,                                  //<---------------------***
 		 MongoClient = require('mongodb').MongoClient,           //<---------------------***
 		 Server = require('mongodb').Server;                     //<---------------------***
 var db = new mongo('test', new Server('localhost', 27017));         //<---------------------***
-var ncoll = db.collection('networks');
-var dcoll = db.collection('devices');
+*/
+//var ncoll = db.collection('networks');
+//var dcoll = db.collection('devices');
 
 function importRDT(rdtName) {
 	// Import a replicated data type to use in the simulation

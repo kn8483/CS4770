@@ -55,6 +55,7 @@ function registerButtonClickHandler() {
 function adminLoginButtonClickHandler() {
 	var username = document.getElementById("username_field").value;
 	var password = document.getElementById("password_field").value;
+	var administrator1 = new administrator(username, password);
 	var authenticated = adminLogin(username, password);
 	if (authenticated) {
 		localStorage.setItem("username", username);

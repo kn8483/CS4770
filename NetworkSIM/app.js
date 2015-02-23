@@ -1,5 +1,4 @@
 // ------------------- MODULE DEPENDENCIES ---------------
-
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -7,11 +6,7 @@ var path = require('path');
 var morgan = require('morgan'); // formerly logger
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
-var mongojs = require("mongojs");
-		//MongoClient = require('mongojs').MongoClient,
-		//Server = require('mongojs').Server;
-		
-var db = mongojs("simdb", ["networks", "devices", "administrators"]);
+var db = require('mongojs').connect('mongodb', ['administrator']);
 var nodemailer = require("nodemailer");
 var errorhandler = require("errorhandler");
 
@@ -34,8 +29,8 @@ app.use(morgan("dev")); // (formerly known as 'logger')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
-//app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
 // development only
 if ('development' === app.get('env')) {
 	app.use(errorhandler());
@@ -43,13 +38,52 @@ if ('development' === app.get('env')) {
 
 // ---------------------- DATABASE -----------------------
 
-var nt = require('./simulation/network_topology.js');
+function administrator(email, password){
+	this.email = email;
+	this.password = email;
+}
+/*
+function network(networkName, networkKind){
+	this.networkName = networkName;
+	this.networkKind = networkKind;
+}
+*/
+
+db.administrators.ensureIndex( { email: 1 }, { unique: true } );
+
+var administrator1 = new administrator("cpgd76@mun.ca", "encapsulation");
+
+
+db.administrators.save(admininstrator1, function(err, savedAdmin){
+	if( err || !savedAdmin) console.log("Adminstrator " + administrator.email + " not saved because of error " + err);
+	else console.log("Administrator " + savedAdmin.email + " saved");
+});
+/*
+db.administrators.find(admin1, function(err, administrators){
+	if( err || !administrators.length) console.log("Administraor " + administrator.email + " not found.");
+	else administrators.forEach( function(administrator){
+		console.log("Administrator found! - " + administrator.email);
+	} );
+});
+*/
+
+/*
+var admin2 = new administrator("Chris", "Doyle", "cpgd76@mun.ca");
+
+db.administrators.save(admin2, function(err, savedUser){
+	if( err || !savedUser) console.log("Adminstrator " + administrator.email + " not saved because of error " + err);
+	else console.log("Administrator " + savedUser.email + " saved");
+});
+*/
+
+//var nt = require('./simulation/network_topology.js');
 /*
 var db = mongojs('db', new Server('localhost', 27017));
 var networks = db.collection('networks');
 var devices = db.collection('devices');
 var administrators = db.collection('administrators');
 */
+/*
 var f = new nt.Administrator("fiech", "encapsulation"); 
 if (f) {
 	console.log("f exists. f.username = " + f.username + ", f.password = " + f.password); 
@@ -60,6 +94,7 @@ db.administrators.insert(f, function(err, doc){
 var fFromCollection = db.administrators.find({username:"fiech"}, function(err, doc){
 	console.log(doc);
 });
+*/
 /*
 if (fFromCollection) {
 	console.log("fFromCollection exists. fFromCollection.next() = " + fFromCollection.next());
@@ -68,6 +103,7 @@ if (fFromCollection) {
 else { console.log("fFromCollection does not exist"); }
 */
 
+/*
 // Copied and pasted from express-mailer example
 // Might need to adjust
 var transporter = nodemailer.createTransport({
@@ -98,6 +134,7 @@ transporter.sendMail(mailOptions, function(error, info) {
 		console.log('Message sent: ' + info.response);
 	}
 });
+*/
 
 // -------------------- ROUTING ----------------------------
 app.get('/', indexroutes.indexRoute);
