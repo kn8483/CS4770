@@ -7,145 +7,82 @@ var morgan = require('morgan'); // formerly logger
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
 var mongojs = require('mongojs');
-var db = mongojs('simdb', ['administrators', 'devices', 'networks']);
+var db = mongojs('simdb', [ 'administrators', 'devices', 'networks' ]);
 var nodemailer = require("nodemailer");
 var errorhandler = require("errorhandler");
 
-// route modules
-var indexroutes = require('./routes/index_routes');
-var adminroutes = require('./routes/admin_routes');
-var userroutes = require('./routes/user');
-var nsroutes = require('./routes/network_settings_routes');
-var rmdroutes = require('./routes/registerMobileDevice_routes');
-var cApproutes = require('./routes/counterApp_routes');
+// File with all the functions
+var router = require('./routes/router');
 
 var app = express();
-
 // all environments
 app.set('port', process.env.PORT || 3444);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
+app.engine('html', require('hogan-express'));
+// app.enable('view cache');
+app.set('view engine', 'html');
+// app.set('view engine', 'hjs');
 // app.use(favicon());
 app.use(morgan("dev")); // (formerly known as 'logger')
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+	extended : true
+}));
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-
 // development only
 if ('development' === app.get('env')) {
 	app.use(errorhandler());
 }
 
-// ---------------------- DATABASE -----------------------
-
-/**After we connected we can query or update the database just how we would using the mongo API with the 
-exception that we use a callback. The format for callbacks is always callback(error, value) 
-where error is null if no exception has occured. The update methods save, remove, update and findAndModify 
-also pass the lastErrorObject as the last argument to the callback function. */
-
-var nt = require("./simulation/network_topology.js")
-
-/**var admin = new nt.Administrator("fiech", "encapsulation"); 
-
-db.administrators.ensureIndex( { username: 1 }, { unique: true } );
-
-db.administrators.save(admin, function(err, doc) {
-	if (err){console.log(err);} 
-	else {
-		console.log("The following object was saved: ");
-		console.log(doc); 
-	}
-}); */
-
-//var administrator2 = new administrator("xxx111222211", "random");
-
-//db.administrators.save(administrator2, function(err, savedAdmin){
-	//if( err || !savedAdmin) console.log("Adminstrator " + administrator.email + " not saved because of error " + err);
-	//else console.log("Administrator " + savedAdmin.email + " saved");
-//});
-
-
-
 /*
-db.administrators.find(admin1, function(err, administrators){
-	if( err || !administrators.length) console.log("Administraor " + administrator.email + " not found.");
-	else administrators.forEach( function(administrator){
-		console.log("Administrator found! - " + administrator.email);
-	} );
-});
-*/
-
-/*
-// Copied and pasted from express-mailer example
-// Might need to adjust
-var transporter = nodemailer.createTransport({
-	service : 'Gmail',
-	auth : {
-		user : 'gmail.user@gmail.com',
-		pass : 'userpass'
-	}
-});
-
-// NB! No need to recreate the transporter object. You can use
-// the same transporter object for all e-mails
-
-// setup e-mail data with unicode symbols
-var mailOptions = {
-	from : 'Fred Foo ✔ <foo@blurdybloop.com>', // sender address
-	to : 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers
-	subject : 'Hello ✔', // Subject line
-	text : 'Hello world ✔', // plaintext body
-	html : '<b>Hello world ✔</b>' // html body
-};
-
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info) {
-	if (error) {
-		console.log(error);
-	} else {
-		console.log('Message sent: ' + info.response);
-	}
-});
-*/
-
+ * // Copied and pasted from express-mailer example // Might need to adjust var
+ * transporter = nodemailer.createTransport({ service : 'Gmail', auth : { user :
+ * 'gmail.user@gmail.com', pass : 'userpass' } }); // NB! No need to recreate
+ * the transporter object. You can use // the same transporter object for all
+ * e-mails // setup e-mail data with unicode symbols var mailOptions = { from :
+ * 'Fred Foo ✔ <foo@blurdybloop.com>', // sender address to :
+ * 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers subject :
+ * 'Hello ✔', // Subject line text : 'Hello world ✔', // plaintext body html : '<b>Hello
+ * world ✔</b>' // html body }; // send mail with defined transport object
+ * transporter.sendMail(mailOptions, function(error, info) { if (error) {
+ * console.log(error); } else { console.log('Message sent: ' + info.response); }
+ * });
+ */
 // -------------------- ROUTING ----------------------------
-app.get('/', indexroutes.indexRoute);
-app.get('/userHome', indexroutes.userHomeRoute);
-app.get('/adminHome', indexroutes.adminHomeRoute);
-app.get('/users', userroutes.list);
-app.get('/networkSettings', adminroutes.networkSettingsRoute);
-app.get('/tokenDelivery', adminroutes.tokenDeliveryRoute);
+app.get('/', router.indexRoute);
+app.get('/userHome', router.userHomeRoute);
+app.get('/adminHome', router.adminHomeRoute);
 
+app.get('/networkSettings', router.networkSettingsRoute);
+app.get('/tokenDelivery', router.tokenDeliveryRoute);
 // network_settings
-app.post('/importRDT', nsroutes.importRDTRoute);
-app.post('/removeRDT', nsroutes.removeRDTRoute);
-app.post('/importApp', nsroutes.importAppRoute);
-app.post('/removeApp', nsroutes.removeAppRoute);
-app.post('/addNetwork', nsroutes.addNetworkRoute);
-app.post('/removeNetwork', nsroutes.removeNetworkRoute);
-app.post('/addDevice', nsroutes.addDeviceRoute);
-app.post('/removeDevice', nsroutes.removeDeviceRoute);
-app.post('/addDeviceToNetwork', nsroutes.addDeviceToNetworkRoute);
-app.post('/removeDeviceFromNetwork', nsroutes.removeDeviceFromNetworkRoute);
-app.post('/connectTwoNetworks', nsroutes.connectTwoNetworksRoute);
-app.post('/disconnectTwoNetworks', nsroutes.disconnectTwoNetworksRoute);
-app.post('/removeDeviceFromCurrentNetwork', nsroutes.removeDeviceFromCurrentNetworkRoute);
-app.post('/returnDeviceToPreviousNetwork', nsroutes.returnDeviceToPreviousNetworkRoute);
-
+app.post('/importRDT', router.importRDTRoute);
+app.post('/removeRDT', router.removeRDTRoute);
+app.post('/importApp', router.importAppRoute);
+app.post('/removeApp', router.removeAppRoute);
+app.post('/addNetwork', router.addNetworkRoute);
+app.post('/removeNetwork', router.removeNetworkRoute);
+app.post('/addDevice', router.addDeviceRoute);
+app.post('/removeDevice', router.removeDeviceRoute);
+app.post('/addDeviceToNetwork', router.addDeviceToNetworkRoute);
+app.post('/removeDeviceFromNetwork', router.removeDeviceFromNetworkRoute);
+app.post('/connectTwoNetworks', router.connectTwoNetworksRoute);
+app.post('/disconnectTwoNetworks', router.disconnectTwoNetworksRoute);
+app.post('/removeDeviceFromCurrentNetwork',
+		router.removeDeviceFromCurrentNetworkRoute);
+app.post('/returnDeviceToPreviousNetwork',
+		router.returnDeviceToPreviousNetworkRoute);
 // registerMobileDevice
-app.post('/distributeToken', rmdroutes.distributeTokenRoute);
-app.post('/registerWithToken', rmdroutes.registerWithTokenRoute);
-app.post('/validateToken', rmdroutes.validateTokenRoute);
-app.post('/adminLogin', rmdroutes.adminLoginRoute);
-
+app.post('/distributeToken', router.distributeTokenRoute);
+app.post('/registerWithToken', router.registerWithTokenRoute);
+app.post('/validateToken', router.validateTokenRoute);
+app.post('/adminLogin', router.adminLoginRoute);
 // counter app
-app.get("/counterApp", cApproutes.counterAppRoute);
-app.post("/increment", cApproutes.incrementRoute);
-app.post("/decrement", cApproutes.decrementRoute);
-
+app.get("/counterApp", router.counterAppRoute);
+app.post("/increment", router.incrementRoute);
+app.post("/decrement", router.decrementRoute);
 // ----------------------- SERVER --------------------------------------
-
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));
 });

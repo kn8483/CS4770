@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "express": "latest",
-    "hjs": "latest",
+    "hogan-express":"*", 
     "morgan":"latest",
     "body-parser":"latest",
     "method-override":"latest",

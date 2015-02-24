@@ -1,50 +1,55 @@
-window.onload = function() {
+/*window.onload = function() {
 	if ((!isAdministrator())) {
 		alert("No valid stored username/password detected. You must be a Simulation "
 				+ "administrator to access this page. You will be redirected to the "
 				+ "index page.");
-		window.location.replace("http://sc-4.cs.mun.ca/");
-};
+		window.location.assign("http://www.google.ca");
+	}
+};*/
 
 // ---------------- Input Fields ------------------------------
-var importRdtName = document.getElementById("importRdtName");
-var removeRdtName = document.getElementById("removeRdtName");
-var importAppName = document.getElementById("importAppName");
-var removeAppName = document.getElementById("removeAppName");
-var addNetworkName = document.getElementById("addNetworkName");
-var addNetworkKind = document.getElementById("addNetworkKind");
-var removeNetworkName = document.getElementById("removeNetworkName");
-var addDeviceName = document.getElementById("addDeviceName");
-var removeDeviceName = document.getElementById("removeDeviceName");
-var addDeviceToNetworkNetworkName = document
-		.getElementById("addDeviceToNetworkNetworkName");
-var addDeviceToNetworkDeviceName = document
-		.getElementById("addDeviceToNetworkDeviceName");
-var removeDeviceFromNetworkNetworkName = document
-		.getElementById("removeDeviceFromNetworkNetworkName");
-var removeDeviceFromNetworkDeviceName = document
-		.getElementById("removeDeviceFromNetworkDeviceName");
-var connectNetwork1Name = document.getElementById("connectNetwork1Name");
-var connectNetwork2Name = document.getElementById("connectNetwork2Name");
-var disconnectNetwork1Name = document.getElementById("disconnectNetwork1Name");
-var disconnectNetwork2Name = document.getElementById("disconnectNetwork2Name");
-var removeDeviceFromCurrentNetworkDeviceName = document
-		.getElementById("removeDeviceFromCurrentNetworkDeviceName");
-var returnDeviceToPreviousNetworkDeviceName = document
-		.getElementById("returnDeviceToPreviousNetworkDeviceName");
-
+window.onload = function() {
+	var importRdtName = document.getElementById("importRdtName");
+	var removeRdtName = document.getElementById("removeRdtName");
+	var importAppName = document.getElementById("importAppName");
+	var removeAppName = document.getElementById("removeAppName");
+	var addNetworkName = document.getElementById("addNetworkName");
+	var addNetworkKind = document.getElementById("addNetworkKind");
+	var removeNetworkName = document.getElementById("removeNetworkName");
+	var addDeviceName = document.getElementById("addDeviceName");
+	var removeDeviceName = document.getElementById("removeDeviceName");
+	var addDeviceToNetworkNetworkName = document
+			.getElementById("addDeviceToNetworkNetworkName");
+	var addDeviceToNetworkDeviceName = document
+			.getElementById("addDeviceToNetworkDeviceName");
+	var removeDeviceFromNetworkNetworkName = document
+			.getElementById("removeDeviceFromNetworkNetworkName");
+	var removeDeviceFromNetworkDeviceName = document
+			.getElementById("removeDeviceFromNetworkDeviceName");
+	var connectNetwork1Name = document.getElementById("connectNetwork1Name");
+	var connectNetwork2Name = document.getElementById("connectNetwork2Name");
+	var disconnectNetwork1Name = document
+			.getElementById("disconnectNetwork1Name");
+	var disconnectNetwork2Name = document
+			.getElementById("disconnectNetwork2Name");
+	var removeDeviceFromCurrentNetworkDeviceName = document
+			.getElementById("removeDeviceFromCurrentNetworkDeviceName");
+	var returnDeviceToPreviousNetworkDeviceName = document
+			.getElementById("returnDeviceToPreviousNetworkDeviceName");
+};
 // ---------------------- Buttons -------------------------------------
 
 function sendPostRequest(data, url) {
 	var request = new XMLHttpRequest();
 	request.open("POST", url);
-	/*
-	 * request.onload = function() { if (request.status == 200) {
-	 * alert("Success! (status code 200 received)"); // Page should be refreshed //
-	 * Call render in server to serve new page } else { alert("Uhhh.....status
-	 * code 200 not received..."); } }
-	 */
-	request.send(data);
+	var s = "";
+	for ( var x in data) {
+		s += x + "=" + data[x] + "&";
+	}
+	console.log(s);
+	request.setRequestHeader("Content-Type",
+			"application/x-www-form-urlencoded");
+	request.send(s);
 }
 
 function importRdtClickHandler() {
@@ -91,9 +96,12 @@ function removeAppClickHandler() {
 
 	sendPostRequest(data, url);
 }
+
 function addNetworkClickHandler() {
+	alert("Add Network Button was clicked!");
 	var networkName = addNetworkName.value;
 	var networkKind = addNetworkKind.value;
+	console.log(networkName + networkKind);
 
 	var data = {
 		"networkName" : networkName,
@@ -152,8 +160,8 @@ function addDeviceToNetworkClickHandler() {
 	sendPostRequest(data, url);
 }
 function removeDeviceFromNetworkClickHandler() {
-	var networkName = removeDeviceToNetworkNetworkName.value;
-	var deviceName = removeDeviceToNetworkDeviceName.value;
+	var networkName = removeDeviceFromNetworkNetworkName.value;
+	var deviceName = removeDeviceFromNetworkDeviceName.value;
 
 	var data = {
 		"networkName" : networkName,
@@ -197,7 +205,8 @@ function removeDeviceFromCurrentClickHandler() {
 		"name" : name
 	};
 
-	var url = "http://" + window.location.host + "/removeDeviceFromCurrentNetwork";
+	var url = "http://" + window.location.host
+			+ "/removeDeviceFromCurrentNetwork";
 
 	sendPostRequest(data, url);
 }
@@ -208,7 +217,8 @@ function returnDeviceFromPreviousHandler() {
 		"name" : name
 	};
 
-	var url = "http://" + window.location.host + "/returnDeviceToPreviousNetwork";
+	var url = "http://" + window.location.host
+			+ "/returnDeviceToPreviousNetwork";
 
 	sendPostRequest(data, url);
 }
