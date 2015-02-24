@@ -29,7 +29,8 @@ window.onload = function() {
 };
 
 function registerButtonClickHandler() {
-	var token = document.getElementById("token_input").value;
+	var token = document.getElementById("token_field").value;
+	console.log("token input is " + token); 
 	var url = "http://" + window.location.host + "/registerWithToken";
 	var request = new XMLHttpRequest();
 	request.open("POST", url);
@@ -43,7 +44,8 @@ function registerButtonClickHandler() {
 			alert("This is not a valid token. Please contact the simulation administrator.");
 		}
 	}
-	request.send(token);
+	request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+	request.send("token="+token);
 }
 function adminLoginButtonClickHandler() {
 	var username = document.getElementById("username_field").value;

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Token Management</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/tokenDelivery.css">
-	<script src="SOME_JAVASCRIPT_FILE.js" type="text/javascript"></script>
+	<script src="/js/tokenDelivery_clientside.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/js/onload_functions.js"></script>
 </head>
 
@@ -17,8 +17,8 @@
 			<h1>Send a Token</h1>
 			<form>
 				<h3>Send a token to the following email address:</h3>
-				<input type="email" placeholder="Enter email address">
-				<button type="button" id="SendTokenButton">Send Token</button>
+				<input type="email" id="email_field" placeholder="Enter email address">
+				<button type="button" id="SendTokenButton" onclick="sendTokenButtonHandler()">Send Token</button>
 			</form>
 		</div>
 	<div>

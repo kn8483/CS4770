@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
 var mongojs = require('mongojs');
 var db = mongojs('simdb', [ 'administrators', 'devices', 'networks' ]);
-var nodemailer = require("nodemailer");
+var mailer = require("express-mailer");
 var errorhandler = require("errorhandler");
 
 // File with all the functions
@@ -35,20 +35,19 @@ if ('development' === app.get('env')) {
 	app.use(errorhandler());
 }
 
-/*
- * // Copied and pasted from express-mailer example // Might need to adjust var
- * transporter = nodemailer.createTransport({ service : 'Gmail', auth : { user :
- * 'gmail.user@gmail.com', pass : 'userpass' } }); // NB! No need to recreate
- * the transporter object. You can use // the same transporter object for all
- * e-mails // setup e-mail data with unicode symbols var mailOptions = { from :
- * 'Fred Foo ✔ <foo@blurdybloop.com>', // sender address to :
- * 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers subject :
- * 'Hello ✔', // Subject line text : 'Hello world ✔', // plaintext body html : '<b>Hello
- * world ✔</b>' // html body }; // send mail with defined transport object
- * transporter.sendMail(mailOptions, function(error, info) { if (error) {
- * console.log(error); } else { console.log('Message sent: ' + info.response); }
- * });
- */
+mailer.extend(app, {
+	from : 'noreply.cs4770.4@gmail.com',
+	host : 'smtp.gmail.com', // hostname
+	secureConnection : true, // use SSL
+	port : 465, // port for secure SMTP
+	transportMethod : 'SMTP', // default is SMTP. Accepts anything that
+								// nodemailer accepts
+	auth : {
+		user : 'noreply.cs4770.4@gmail.com',
+		pass : 'correcthorsebatterystaple1'
+	}
+});
+
 // -------------------- ROUTING ----------------------------
 app.get('/', router.indexRoute);
 app.get('/userHome', router.userHomeRoute);
@@ -78,6 +77,7 @@ app.post('/distributeToken', router.distributeTokenRoute);
 app.post('/registerWithToken', router.registerWithTokenRoute);
 app.post('/validateToken', router.validateTokenRoute);
 app.post('/adminLogin', router.adminLoginRoute);
+app.post('/distributeToken', router.distributeTokenRoute); 
 // counter app
 app.get("/counterApp", router.counterAppRoute);
 app.post("/increment", router.incrementRoute);
