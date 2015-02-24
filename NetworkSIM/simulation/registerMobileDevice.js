@@ -2,21 +2,43 @@
 
 var nt = require('./network_topology');
 var admin = require('./admin');
-var db = require('mongojs').connect('mongodb', ['devices']);
+var mongojs = require('mongojs');
+var db = mongojs('simdb', ['administrators', 'devices', 'networks']);
+//var mongojs =require('mongojs');
+//var db = mongojs('mongodb');
 /*
 var mongo = require("mongodb").Db,
 		 MongoClient = require('mongodb').MongoClient,
 		 Server = require('mongodb').Server;
 var db = new mongo('test', new Server('localhost', 27017));
 */
-var ncoll = db.collection('networks');
-var dcoll = db.collection('devices');
-var acoll = db.collection('administrators');
+//var ncoll = db.collection('networks');
+//var dcoll = db.collection('devices');
+//var acoll = db.collection('administrators');
 var app = require('../app').app; // use app.mailer to send e-mail
+
 
 //acoll.insert(new nt.Administrator("fiech", "encapsulation")); // the only
 // administrator
 // !
+
+var adminObj = db.administrators.findOne({username : "fiech"}, function(err, doc) {
+	if (err) {console.log(err)} 
+	else {
+		console.log("this code is written inside registerMobileDevice.js but is executed when we run app.js!"); 
+		console.log("fiech's password is " + doc.password); 
+	}
+}) ;
+
+function mongojsCallback(err, doc) {
+	if (err){
+		console.log(err);
+	} 
+	else {
+		console.log("The following object was saved: ");
+		console.log(doc); 
+	}
+} 
 
 /**
  * 1. Get reference to one unassigned device 2. Get that device's token (id) 3.
@@ -25,7 +47,7 @@ var app = require('../app').app; // use app.mailer to send e-mail
  */
 function distributeToken(emailAddress) {
 
-	var unassignedDevice = dcoll.findOne({
+	var unassignedDevice = db.devices.findOne({
 		assigned : false
 	});
 	var hexstring = unassignedDevice._id.valueOf(); // valueOf method returns
@@ -97,14 +119,24 @@ function validateToken(token) {
 
 function adminLogin(uName, pWord) {
 	console.log("inside adminLogin function inside simulation/registerMobileDevice.js ");
-	var doc = acoll.findOne({
+	console.log("uName is: " + uName);
+	console.log("pWord is: " + pWord); 
+	db.administrators.findOne({
 		username : uName,
 		password : pWord
+	}, function (err, doc){
+		if (err) {
+			console.log("inside adminLogin, finding username/password returned following error: "); 
+			console.log(err);
+			return false; 			
+		}
+		
+		else {
+			console.log("finding username/password returned following object:");
+			console.log(doc);
+			return true; 
+		}
 	});
-	if (doc)
-		return true;
-	else
-		return false;
 }
 
 exports.registerWithToken = registerWithToken;

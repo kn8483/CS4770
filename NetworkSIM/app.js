@@ -6,7 +6,8 @@ var path = require('path');
 var morgan = require('morgan'); // formerly logger
 var bodyParser = require('body-parser');
 var methodOverride = require("method-override");
-var db = require('mongojs').connect('mongodb', ['administrators']);
+var mongojs = require('mongojs');
+var db = mongojs('simdb', ['administrators', 'devices', 'networks']);
 var nodemailer = require("nodemailer");
 var errorhandler = require("errorhandler");
 
@@ -21,13 +22,13 @@ var cApproutes = require('./routes/counterApp_routes');
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3444);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 // app.use(favicon());
 app.use(morgan("dev")); // (formerly known as 'logger')
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,26 +39,34 @@ if ('development' === app.get('env')) {
 
 // ---------------------- DATABASE -----------------------
 
-function administrator(email, password){
-	this.email = email;
-	this.password = email;
-}
-/*
-function network(networkName, networkKind){
-	this.networkName = networkName;
-	this.networkKind = networkKind;
-}
-*/
+/**After we connected we can query or update the database just how we would using the mongo API with the 
+exception that we use a callback. The format for callbacks is always callback(error, value) 
+where error is null if no exception has occured. The update methods save, remove, update and findAndModify 
+also pass the lastErrorObject as the last argument to the callback function. */
 
-db.administrators.ensureIndex( { email: 1 }, { unique: true } );
+var nt = require("./simulation/network_topology.js")
 
-var administrator1 = new administrator("cpgd76@mun.ca", "encapsulation");
+/**var admin = new nt.Administrator("fiech", "encapsulation"); 
+
+db.administrators.ensureIndex( { username: 1 }, { unique: true } );
+
+db.administrators.save(admin, function(err, doc) {
+	if (err){console.log(err);} 
+	else {
+		console.log("The following object was saved: ");
+		console.log(doc); 
+	}
+}); */
+
+//var administrator2 = new administrator("xxx111222211", "random");
+
+//db.administrators.save(administrator2, function(err, savedAdmin){
+	//if( err || !savedAdmin) console.log("Adminstrator " + administrator.email + " not saved because of error " + err);
+	//else console.log("Administrator " + savedAdmin.email + " saved");
+//});
 
 
-db.administrators.save(administrator1, function(err, savedAdmin){
-	if( err || !savedAdmin) console.log("Adminstrator " + administrator.email + " not saved because of error " + err);
-	else console.log("Administrator " + savedAdmin.email + " saved");
-});
+
 /*
 db.administrators.find(admin1, function(err, administrators){
 	if( err || !administrators.length) console.log("Administraor " + administrator.email + " not found.");
@@ -65,42 +74,6 @@ db.administrators.find(admin1, function(err, administrators){
 		console.log("Administrator found! - " + administrator.email);
 	} );
 });
-*/
-
-/*
-var admin2 = new administrator("Chris", "Doyle", "cpgd76@mun.ca");
-
-db.administrators.save(admin2, function(err, savedUser){
-	if( err || !savedUser) console.log("Adminstrator " + administrator.email + " not saved because of error " + err);
-	else console.log("Administrator " + savedUser.email + " saved");
-});
-*/
-
-//var nt = require('./simulation/network_topology.js');
-/*
-var db = mongojs('db', new Server('localhost', 27017));
-var networks = db.collection('networks');
-var devices = db.collection('devices');
-var administrators = db.collection('administrators');
-*/
-/*
-var f = new nt.Administrator("fiech", "encapsulation"); 
-if (f) {
-	console.log("f exists. f.username = " + f.username + ", f.password = " + f.password); 
-}
-db.administrators.insert(f, function(err, doc){
-	console.log(doc);
-});
-var fFromCollection = db.administrators.find({username:"fiech"}, function(err, doc){
-	console.log(doc);
-});
-*/
-/*
-if (fFromCollection) {
-	console.log("fFromCollection exists. fFromCollection.next() = " + fFromCollection.next());
-	//console.log(fFromCollection); 
-}
-else { console.log("fFromCollection does not exist"); }
 */
 
 /*
@@ -157,10 +130,8 @@ app.post('/addDeviceToNetwork', nsroutes.addDeviceToNetworkRoute);
 app.post('/removeDeviceFromNetwork', nsroutes.removeDeviceFromNetworkRoute);
 app.post('/connectTwoNetworks', nsroutes.connectTwoNetworksRoute);
 app.post('/disconnectTwoNetworks', nsroutes.disconnectTwoNetworksRoute);
-app.post('/removeDeviceFromCurrentNetwork',
-		nsroutes.removeDeviceFromCurrentNetworkRoute);
-app.post('/returnDeviceToPreviousNetwork',
-		nsroutes.returnDeviceToPreviousNetworkRoute);
+app.post('/removeDeviceFromCurrentNetwork', nsroutes.removeDeviceFromCurrentNetworkRoute);
+app.post('/returnDeviceToPreviousNetwork', nsroutes.returnDeviceToPreviousNetworkRoute);
 
 // registerMobileDevice
 app.post('/distributeToken', rmdroutes.distributeTokenRoute);

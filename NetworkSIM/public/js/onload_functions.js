@@ -46,16 +46,14 @@ function isAdministrator() {
 }
 
 function adminLogin(username, password) {
-
 	var url = "http://" + window.location.host + "/adminLogin";
-
 	var request = new XMLHttpRequest();
 	request.open("POST", url);
 	request.onload = function() {
 		if (request.status === 200) {
 			return true;
+			
 		}
-
 		else if (request.status === 400) {
 			return false;
 		}
@@ -64,5 +62,6 @@ function adminLogin(username, password) {
 		"username" : username,
 		"password" : password
 	}
-	request.send(data);
+	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	request.send("username="+username+"&password="+password);
 }

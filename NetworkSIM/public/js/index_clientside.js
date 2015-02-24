@@ -55,25 +55,22 @@ function registerButtonClickHandler() {
 function adminLoginButtonClickHandler() {
 	var username = document.getElementById("username_field").value;
 	var password = document.getElementById("password_field").value;
-	var administrator1 = new administrator(username, password);
-	/*
-	var authenticated = adminLogin(username, password);
-	if (authenticated) {
-		localStorage.setItem("username", username);
-		localStorage.setItem("password", password);
-		window.location.assign("http://sc-4.cs.mun.ca/adminHome");
-	} else {
-		alert("Invalid username/password combo.");
+	alert("username is " + username + " password is "  + password + ", sending authentication " + 
+		"request to http://" + window.location.host + "/adminLogin" );
+	
+	var url = "http://" + window.location.host + "/adminLogin";
+	var request = new XMLHttpRequest();
+	request.open("POST", url);
+	request.onload = function() {
+		if (request.status === 200) {
+			localStorage.setItem("username", username);
+			localStorage.setItem("password", password);
+			alert("successful authentication, don't be scared Chris by what happens next!"); 
+			window.location.assign("http://" + window.location.host + "/adminHome");			
+		}
+		else if (request.status === 400) {
+			alert("Invalid username/password combo.");
+		}
 	}
-	*/
-	db.administrators.find(administrator1, function(err, Admin){
-	if( err || !Admin.length){
-		console.log("Administraor " + administrator.email + " not found.")
-		alert(";
-	else administrators.forEach( function(administrator){
-		console.log("Administrator found! - " + administrator.email);
-		window.location.replace("http://sc-4.cs.mun.ca/adminHome");
-		var url = "http://" + window.location.host + "/adminHome";
-	} );
-});
 }
+
