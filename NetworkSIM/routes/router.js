@@ -79,10 +79,7 @@ exports.adminHomeRoute = function(req, res) {
 };
 
 exports.networkSettingsRoute = function(req, res) {
-    res.render('networkSettings', {
-	networkTotal : 6,
-	appTotal : "helloworld"
-    });
+	hogan(res); 
 };
 
 exports.tokenDeliveryRoute = function(req, res) {
@@ -256,7 +253,8 @@ exports.addNetworkRoute = function(req, res) {
 	    console.log(n);
 	    // var template = getHoganTemplate();
 	    // console.log(template);
-	    hogan(res);
+		res.status(200);
+		res.end();
 	}
     });
 };
@@ -275,7 +273,8 @@ exports.removeNetworkRoute = function(req, res) {
 	    console.log(doc);
 	    // var template = getHoganTemplate();
 	    // console.log(template);
-	    hogan(res);
+		res.status(200);
+		res.end();
 	    // res.render('networkSettings', template);
 	}
     });
@@ -294,7 +293,8 @@ exports.addDeviceRoute = function(req, res) {
 	    console.log(doc);
 	    // var template = getHoganTemplate();
 	    // console.log(template);
-	    hogan(res);
+		res.status(200);
+		res.end();
 	    // res.render('networkSettings', template);
 	}
     });
@@ -314,7 +314,8 @@ exports.removeDeviceRoute = function(req, res) {
 	    console.log(doc);
 	    // var template = getHoganTemplate();
 	    // console.log(template);
-	    hogan(res);
+		res.status(200);
+		res.end();
 	    // res.render('networkSettings', template);
 	}
     });
@@ -368,7 +369,8 @@ exports.addDeviceToNetworkRoute = function(req, res) {
 										    .log(d);
 									    console
 										    .log(n);
-									    hogan(res);
+										res.status(200);
+										res.end();
 									}
 								    });
 						}
@@ -417,7 +419,8 @@ exports.removeDeviceFromNetworkRoute = function(req, res) {
 								console.log(n);
 								console
 									.log(req.body.deviceName);
-								hogan(res);
+								res.status(200);
+								res.end();
 							    }
 							});
 				    }

@@ -47,6 +47,16 @@ function sendPostRequest(data, url) {
 		s += x + "=" + data[x] + "&";
 	}
 	console.log(s);
+	request.onload = function() {
+		if (request.status === 200) {
+			alert("Status 200 received! Operation successful!"); 
+			window.location.reload(); 
+		}
+		
+		else {
+			alert("No successfull status code from server."); 
+		}
+	}
 	request.setRequestHeader("Content-Type",
 			"application/x-www-form-urlencoded");
 	request.send(s);
