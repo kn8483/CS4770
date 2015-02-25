@@ -15,8 +15,9 @@ var errorhandler = require("errorhandler");
 var router = require('./routes/router');
 
 var app = express();
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.5.199.1";
 // all environments
-app.set('port', process.env.PORT || 3444);
+app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('hogan-express'));
 // app.enable('view cache');
