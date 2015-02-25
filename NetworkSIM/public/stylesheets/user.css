@@ -20,6 +20,13 @@
 		font-weight: 900;
 		color: #E8E8E8;
 	}
+		#userLogoutButton{
+			position: absolute;
+			margin: -50px 0 0 1100px;
+			font-size: 20px;
+			height: 30px;
+			width: 150px;
+		}
 	#ViewWindow{
 		height: 88%;
 		width: 83.5%;

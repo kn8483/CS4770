@@ -93,6 +93,7 @@
 	}
 		#network_summary, #device_summary, #app_summary{
 			max-height: 200px;
+			min-height: 100px;
 			border: 2px solid;
 			overflow: auto;
 			font-family: Georgia, "Times New Roman", Times, serif;

@@ -129,7 +129,6 @@ exports.comingSoonRoute = function(req, res)
 	res.render('comingSoon');
 };
 
-
 // ---- Login and Registration (from index.html)
 
 exports.adminLoginRoute = function(req, res)

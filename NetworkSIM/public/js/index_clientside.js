@@ -55,10 +55,9 @@ function registerButtonClickHandler()
 			localStorage.setItem("token", token);
 			alert("This device has been registered successfully. You may now access "
 			    + "the Simulation and its applications. Your token is saved in your "
-			    + "browser so login will be automatic. You will now be redirected to the "
-			    + "User Home Page.");
-			window.location.assign("http://" + window.location.host
-			    + "/userHome");
+			    + "browser so login will be automatic from now on. You will now be  "
+			    + "redirected to your User Home Page.");
+			window.location.assign("http://" + window.location.host + "/userHome");
 		}
 		else if (request.status === 400)
 		{

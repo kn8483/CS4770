@@ -35,7 +35,7 @@ function activatePopUp(event){
 	popupWindow.ondragover = isDropAllowed;
 
 	var topheading = document.createElement("pre");
-	topheading.innerHTML = "Network Devices";
+	topheading.innerHTML = "MUN";
 
 	var spacing = document.createElement("span");
 	spacing.setAttribute("style", "padding:45px");

@@ -1,65 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta content="text/html" charset="UTF-8"></meta>
-		<link rel="stylesheet" type="text/css" href="/stylesheets/networkTopology.css">
-		<script type="text/javascript" src="/js/networkTopology.js"></script>
+<head>
+	<meta content="text/html" charset="UTF-8"></meta>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/networkTopology.css">
+	<script type="text/javascript" src="/js/networkTopology.js"></script>
 		
-	</head>
-	<body id="t001">
-		<table id="t002">
-			<tr>
-				<td class="networkContainer" id="network00006" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
-					<img src="network.jpg" class="network" draggable="false"></img>
-				</td>
-				<td>
-					<p>This is the network discription 1</p>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<img src="network.jpg" id="network00007" class="network" draggable="false" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img>
-				</td>
-				<td>
-					<p>This is the network discription 2</p>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<img src="network.jpg" id="network00008" class="network" draggable="false" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img>
-				</td>
-				<td>
-					<p>This is the network discription 3</p>
-				</td>
-			</tr>
+</head>
+<body id="topologyBorder">
+	<div>
+		<h1 id="networksBanner">Networks</h1>
+		<h1 id="networkTopologyBanner">Network Topology</h1>
+	</div>	
+	<form>		
+		<tr class="networkContainer" id="network00006" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+			<img src="/js/network.jpg" class="network" draggable="false" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img> 
+			MUN
+		</tr><br>
+		<tr class="networkContainer" id="network00006" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+			<img src="/js/network.jpg" id="network00007" class="network" draggable="false" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img>
+			stu
+		</tr><br>
+		<tr class="networkContainer" id="network00006" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+			<img src="/js/network.jpg" id="network00008" class="network" draggable="false" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img>
+			fac
+		</tr><br>
+		<tr class="networkContainer" id="network00006" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+			<img src="/js/network.jpg" id="network00008" class="network" draggable="false" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img>
+			Computer Science
+		</tr><br>
+		<tr class="networkContainer" id="network00006" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+			<img src="/js/network.jpg" id="network00007" class="network" draggable="false" onclick="activatePopUp(event)" ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img>
+			Education
+		</tr><br>
+		<tr class="networkContainer" id="network00006" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+			<img src="/js/network.jpg" id="network00008" class="network" draggable="false" onclick=activatePopUp(event) ondrop="dropListener(event)" ondragover="isDropAllowed(event)"></img>
+			Trilobite
+		</tr><br>				
+	</form>			
+	<div id="outerDiv"><!--Used as a place to add or remove the popup windows DO NOT REMOVE-->
+		<div class="draggable" id="pu001" draggable="true" ondragstart="startDragListener(event)">
 
-		</table>
-		
-		<div id="outerDiv"><!--Used as a place to add or remove the popup windows DO NOT REMOVE-->
-			<div class="draggable" id="pu001" draggable="true" ondragstart="startDragListener(event)">
-
-				<pre>Network Devices<span  style="padding:45px"></span> <a onclick="closePopUp()" style="color:red">close</a></pre>
-				<div id="router00002" draggable="true" class="routerContainer" ondragstart="startDragListener(event)" ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
-					<img src="router-256x256.png" class="router" draggable="false"></img> This is device 6<br>
-					<span style="padding:20px" id="client00004" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
-						<img src="workstation-256x256.png" class="client" draggable="false"></img> This is device 1<br>
-					</span>
-					<span style="padding:20px" id="client00003" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
-						<img src="workstation-256x256.png" class="client" draggable="false"></img> This is device 2<br>
-					</span>
-					<span style="padding:20px" id="client00010" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
-						<img src="workstation-256x256.png" class="client" draggable="false"></img> This is device 3<br>
-					</span>
-					<span style="padding:20px" id="client00011" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
-						<img src="workstation-256x256.png" class="client" draggable="false"></img> This is device 4<br>
-					</span>
-				</div>
-				<div id="router00003" draggable="true" class="routerContainer" ondragstart="startDragListener(event)" ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
-					<img src="router-256x256.png" id="router00003" class="router" draggable="false"></img> This is device 7<br>
-				</div>
-
+			<pre>Network List<span  style="padding:45px"></span> <a onclick="closePopUp()" style="color:red">close</a></pre>
+			<div id="network" draggable="true" class="routerContainer" ondragstart="startDragListener(event)" ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+				<img src="/js/router-256x256.png" class="router" draggable="false"></img> Computer Science<br>
+				<span style="padding:20px" id="client00004" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Iphone 1<br>
+				</span>
+				<span style="padding:20px" id="client00003" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Iphone 2<br>
+				</span>
+				<span style="padding:20px" id="client00010" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Iphone 3<br>
+				</span>
+				<span style="padding:20px" id="client00011" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Iphone 4<br>
+				</span>
 			</div>
-
+			<div id="network" draggable="true" class="routerContainer" ondragstart="startDragListener(event)" ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+				<img src="/js/router-256x256.png" id="router00003" class="router" draggable="false"></img>Education<br>
+				<span style="padding:20px" id="client00004" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>John's Macbook<br>
+				</span>
+				<span style="padding:20px" id="client00003" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Laura's Macbook<br>
+				</span>
+				<span style="padding:20px" id="client00010" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Chris' Iphone<br>
+				</span>
+				<span style="padding:20px" id="client00011" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Brittany's Ipad<br>
+				</span>
+			</div>
+			<div id="network" draggable="true" class="routerContainer" ondragstart="startDragListener(event)" ondrop="dropListener(event)" ondragover="isDropAllowed(event)">
+				<img src="/js/router-256x256.png" id="router00003" class="router" draggable="false"></img>Trilobite<br>
+				<span style="padding:20px" id="client00004" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Laptop 1<br>
+				</span>
+				<span style="padding:20px" id="client00003" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Laptop 2<br>
+				</span>
+				<span style="padding:20px" id="client00010" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Laptop 3<br>
+				</span>
+				<span style="padding:20px" id="client00011" class="clientContainer" draggable="true" ondragstart="startDragListener(event)">
+					<img src="/js/workstation-256x256.png" class="client" draggable="false"></img>Laptop 4<br>
+				</span>
+			</div>
+			
 		</div>
-	</body>
+	</div>
+</body>
 </html>
