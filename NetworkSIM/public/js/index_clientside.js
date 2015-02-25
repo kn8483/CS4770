@@ -34,6 +34,11 @@ window.onload = function()
 		    + "be redirected to the User Home Page.");
 		window.location.assign("http://" + window.location.host + "/userHome");
 	}
+
+	else
+	{
+		console.log("isRegisteredUser() returned false, so no redirect");
+	}
 };
 
 function registerButtonClickHandler()
@@ -49,7 +54,7 @@ function registerButtonClickHandler()
 		{
 			localStorage.setItem("token", token);
 			alert("This device has been registered successfully. You may now access "
-			    + "the simulation and its applications. Your token is saved in your "
+			    + "the Simulation and its applications. Your token is saved in your "
 			    + "browser so login will be automatic. You will now be redirected to the "
 			    + "User Home Page.");
 			window.location.assign("http://" + window.location.host

@@ -23,6 +23,7 @@ function isRegisteredUser()
 			{
 				console.log("Invalid token " + token
 				    + " found in local storage.")
+				return false;
 			}
 		};
 		request.setRequestHeader("Content-type",
