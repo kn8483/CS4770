@@ -1,4 +1,4 @@
-window.onload = function()
+/*window.onload = function()
 {
 	if ((!isAdministrator()))
 	{
@@ -7,7 +7,7 @@ window.onload = function()
 		    + "index, where you can login.");
 		window.location.assign("http://" + window.location.host + "/");
 	}
-};
+};*/
 
 function sendTokenButtonHandler()
 {

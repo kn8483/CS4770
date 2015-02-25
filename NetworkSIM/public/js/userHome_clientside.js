@@ -1,4 +1,4 @@
-window.onload = function()
+/*window.onload = function()
 {
 	if ((!isRegisteredUser()) && (!isAdministrator()))
 	{
@@ -8,6 +8,7 @@ window.onload = function()
 		window.location.assign("http://" + window.location.host + "/index");
 	}
 };
+ */
 
 function load_comingSoon()
 {

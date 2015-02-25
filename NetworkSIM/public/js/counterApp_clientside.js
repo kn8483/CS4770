@@ -1,4 +1,7 @@
-window.onload = function()
+window.onload = counterAppOnloadFunction; 
+
+/*function() = 
+
 {
 	if ((!isRegisteredUser()) && (!isAdministrator()))
 	{
@@ -12,7 +15,7 @@ window.onload = function()
 	{
 		counterAppOnloadFunction();
 	}
-};
+};*/
 
 function sendPostRequest(data, url)
 {

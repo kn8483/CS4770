@@ -82,6 +82,50 @@ app.get("/counterApp", router.counterAppRoute);
 app.post("/increment", router.incrementRoute);
 app.post("/decrement", router.decrementRoute);
 
+app.get('/getNetworkNames', function(req, res)
+{
+	db.networks.find({}, function(err, docs)
+	{
+		if (err)
+		{
+			console.log(err);
+		}
+
+		else if (docs)
+		{
+			var networkNames = [];
+			for (var i = 0; i < docs.length; i++)
+			{
+				networkNames.push(docs[i].networkName);
+			}
+			res.setHeader("Content-Type", "application/json");
+			res.end(JSON.stringify(networkNames));
+		}
+	});
+});
+
+app.get('/getDeviceNames', function(req, res)
+{
+	db.devices.find({}, function(err, docs)
+	{
+		if (err)
+		{
+			console.log(err);
+		}
+
+		else if (docs)
+		{
+			var deviceNames = [];
+			for (var i = 0; i < docs.length; i++)
+			{
+				deviceNames.push(docs[i].deviceName);
+			}
+			res.setHeader("Content-Type", "application/json");
+			res.end(JSON.stringify(deviceNames));
+		}
+	});
+});
+
 // ----------------------- SERVER --------------------------------------
 http.createServer(app).listen(app.get('port'), function()
 {

@@ -15,7 +15,7 @@ $(function()
 	});
 });
 // -------------------------------------------------------------------------
-window.onload = function()
+/*window.onload = function()
 {
 	if (isAdministrator())
 	{
@@ -39,7 +39,7 @@ window.onload = function()
 	{
 		console.log("isRegisteredUser() returned false, so no redirect");
 	}
-};
+};*/
 
 function registerButtonClickHandler()
 {

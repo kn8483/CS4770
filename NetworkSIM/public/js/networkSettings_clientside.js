@@ -1,4 +1,4 @@
-window.onload = function()
+/*window.onload = function()
 {
 	if ((!isAdministrator()))
 	{
@@ -7,7 +7,7 @@ window.onload = function()
 		    + "index, where you can login.");
 		window.location.assign("http://" + window.location.host + "/");
 	}
-};
+};*/
 
 // ---------------- Input Fields ------------------------------
 window.onload = function()
@@ -39,6 +39,23 @@ window.onload = function()
 	    .getElementById("removeDeviceFromCurrentNetworkDeviceName");
 	var returnDeviceToPreviousNetworkDeviceName = document
 	    .getElementById("returnDeviceToPreviousNetworkDeviceName");
+
+	// The following is for turning the text inputs into select menus by getting
+	// the names of all the networks (and then devices) and using the list
+	// to populate the menu options. Finish later. Go to bed.
+	/*
+	 * var request = new XMLHttpRequest(); request.open("GET", "http://" +
+	 * window.location.host + "/getNetworkNames"); request.onload = function() {
+	 * if (request.responseText) { var networkNameArray =
+	 * JSON.parse(request.responseText); //alert(networkNameArray[0]); for (var
+	 * i = 0; i < networkNameArray.length; i++) { var name =
+	 * networkNameArray[i]; var option = document.createElement("option");
+	 * option.text = name; removeNetworkName.add(option);
+	 * addDeviceToNetworkNetworkName.add(option); removeNetworkName.add(option);
+	 * removeNetworkName.add(option); removeNetworkName.add(option); } } }
+	 * request.send();
+	 */
+
 };
 // ---------------------- Buttons -------------------------------------
 

@@ -1,3 +1,16 @@
+/*
+ * The problem is that the onload function is an asynchronous
+ * callback. The rest of the clientside onload is executed 
+ * before the server has responded, so the check doesn't work. 
+ * Can correct by performing necessary alert and redirection
+ * INSIDE CALLBACK. Note - RETURNING VALUES FROM CALLBACKS 
+ * is a BAD STRATEGY.
+ * 
+ * Leave this file where it is (in the head of all the pages)
+ * and just comment out the onload functions in each page's
+ * js file. Fix this later.
+ */
+
 function isRegisteredUser()
 {
 
