@@ -1,10 +1,32 @@
-var nt = require('./network_topology');
-var db = require('mongojs').connect('mongodb', [ 'administrator' ],
-		[ 'networks' ], [ 'devices' ]);
+/**
+ * IMPORTANT: When mongo inserts the device in the devices table, it ADDS an _id
+ * attribute. The VALUE of that attribute is an object called an ObjectID. That
+ * ObjectID has a unique hexadecimal string representation (generated using the
+ * time of insertion, some random elements, etc.) It is this hexadecimal string
+ * that we will use as "tokens" for registering with the simulation. The string
+ * is accessible through the ObjectId's 'str' attribute (which can be accessed
+ * directly, or returned by the valueOf() method).
+ */
 
-function importRDT(rdtName) {
+var mongojs = require('mongojs');
+var db = mongojs('simdb', [ 'administrators', 'devices', 'networks' ]);
+db.administrators.ensureIndex(
+	{ username : 1 },
+	{ unique : true });
+db.networks.ensureIndex(
+	{ networkName : 1 },
+	{ unique : true });
+db.devices.ensureIndex(
+	{ deviceName : 1 },
+	{ unique : true });
+var network_topology = require('../simulation/network_topology');
+var Network = network_topology.Network;
+var Device = network_topology.Device;
+var Administrator = network_topology.Administrator;
+
+function importRDT(rdtName)
+{
 	// Import a replicated data type to use in the simulation
-
 	/*
 	 * The RDT will have a common interface like the following after you import
 	 * it:
@@ -19,169 +41,246 @@ function importRDT(rdtName) {
 	 * current value of the counter
 	 */
 }
-
-function removeRDT(rdtName) {
+function removeRDT(rdtName)
+{
 	// Remove the RDT from the simulation
 }
 
-function importApp(appName) {
+function importApp(appName)
+{
 	// Import and initialize your web application in the simulation
 }
 
-function removeApp(appName) {
+function removeApp(appName)
+{
 	// Remove the application from the simulation
 }
 
-function addNetwork(networkName, networkKind) { // to Simulation
-	var n = new nt.Network(networkName, networkKind);
-	ncoll.insert(n); // add _id field, mapped to an ObjectId object, into a
-	// new Network object, and inserts in the table
+// Add a Network object to the simulation by saving to the collection
+function addNetwork(networkName, networkKind)
+{
+	console.log("Adding network with name : " + networkName + " and kind "
+	    + networkKind);
+	var n = new Network(networkName, networkKind);
+	db.networks
+	    .save(
+	        n,
+	        function(err, doc)
+	        {
+		        if (err)
+		        {
+			        console.log(err);
+		        }
+		        else
+		        {
+			        console
+			            .log("The following Network object was saved in the networks collection:");
+			        console.log(doc);
+		        }
+	        });
 }
 
-function removeNetwork(name) { // from Simulation
-	ncoll.remove({
-		networkName : name
-	});
+// Remove Network object from Simulation by removing from database
+function removeNetwork(name)
+{
+	console.log("Removing network with name : " + name);
+	db.networks
+	    .remove(
+		        { networkName : name },
+	        function(err, doc)
+	        {
+		        if (err)
+		        {
+			        console.log(err);
+		        }
+		        else
+		        {
+			        console
+			            .log("The following Network object was removed from the networks collection:");
+			        console.log(doc);
+		        }
+	        });
 }
 
-/**
- * IMPORTANT: When mongo inserts the device in the devices table, it ADDS an _id
- * attribute. The VALUE of that attribute is an object called an ObjectID. That
- * ObjectID has a unique hexadecimal string representation (generated using the
- * time of insertion, some random elements, etc.) It is this hexadecimal string
- * that we will use as "tokens" for registering with the simulation. The string
- * is accessible through the ObjectId's 'str' attribute (which can be accessed
- * directly, or returned by the valueOf() method).
- */
-function addDevice(dName) { // to Simulation
-	var d = new nt.Device(dName);
-	dcoll.insert(d); // add _id field, mapped to an ObjectId object, into a
-	// new Device object, and inserts in the table
+// Add a Device object to the Simulation by saving it to the collection
+function addDevice(dName)
+{
+	console.log("Adding device with name : ");
+	var d = new Device(dName);
+	db.devices
+	    .save(
+	        d,
+	        function(err, doc)
+	        {
+		        if (err)
+		        {
+			        console.log(err);
+		        }
+		        else
+		        {
+			        console
+			            .log("The following Device object was saved in the devices collection:");
+			        console.log(doc);
+		        }
+	        });
 }
 
-function removeDevice(dName) { // from Simulation
-	dcoll.remove({
-		deviceName : dName
-	});
+// Remove Device from simulation by deleting from collection
+
+function removeDevice(dName)
+{
+	console.log("Removing device with name : " + dName);
+	db.devices
+	    .remove(
+		        { deviceName : dName },
+	        function(err, doc)
+	        {
+		        if (err)
+		        {
+			        console.log(err);
+		        }
+		        else
+		        {
+			        console
+			            .log("The following Device object was removed from the devices collection:");
+			        console.log(doc);
+		        }
+	        });
 }
 
-function addDeviceToNetwork(nName, dName) {
-	var device = dcoll.findOne({
-		deviceName : dName
-	});
-	var network = ncoll.findOne({
-		networkName : nName
-	});
-	network.deviceList.push(device);
-	ncoll.save(network);
+function addDeviceToNetwork(nName, dName)
+{
+	console.log("Adding Device " + dName + " to Network " + nName);
+	db.networks
+	    .findOne(
+		        { networkName : nName },
+	        function(err, n)
+	        {
+		        if (err)
+		        {
+			        console.log(err);
+		        }
+		        else
+		        {
+			        db.devices
+			            .findOne(
+				                { deviceName : dName },
+			                function(err, d)
+			                {
+				                if (err)
+				                {
+					                console.log(err);
+				                }
+				                else
+				                {
+					                if (!d)
+					                {
+						                d = new Device(dName);
+					                }
+					                if (n.deviceList)
+					                {
+						                n.deviceList.push(d);
+					                }
+					                else
+					                {
+						                n.deviceList = [];
+						                n.deviceList.push(d);
+					                }
+					                db.networks
+					                    .save(
+					                        n,
+					                        function(err, nDoc)
+					                        {
+						                        if (err)
+						                        {
+							                        console.log(err);
+						                        }
+						                        else
+						                        {
+							                        console
+							                            .log("The following device object was saved to the following network object:");
+							                        console.log(d);
+							                        console.log(nDoc);
+						                        }
+					                        });
+				                }
+			                });
+		        }
+	        });
+}
+function removeDeviceFromNetwork(nName, dName)
+{
+	console.log("Removing device " + dName + " from network " + nName);
+	db.networks
+	    .findOne(
+		        { networkName : nName },
+	        function(err, n)
+	        {
+		        if (err)
+		        {
+			        console.log(err);
+		        }
+		        else
+		        {
+			        if (n.deviceList)
+			        {
+				        for (var i = 0; i < n.deviceList.length; i++)
+				        {
+					        if (n.deviceList[i].deviceName === dName)
+					        {
+						        // use splice hack to remove from array
+						        // first param is where new elements should be
+						        // added
+						        // second param is how many elements to delete
+						        // other params (elements that would be added)
+						        // are omitted
+						        n.deviceList.splice(i, 1);
+						        db.networks
+						            .save(
+						                n,
+						                function(err, doc)
+						                {
+							                if (err)
+							                {
+								                console.log(err);
+							                }
+
+							                else
+							                {
+								                console
+								                    .log("A device with name "
+								                        + dName
+								                        + " was removed from the following network object:");
+								                console.log(doc);
+							                }
+						                });
+					        }
+				        }
+			        }
+		        }
+	        });
+}
+function connectTwoNetworks(n1Name, n2Name)
+{
+	// To be implemented
+	// Need TRANSITIVE CLOSURE
+	// Possibly new collection in db?
 }
 
-function removeDeviceFromNetwork(nName, dName) {
-	var device = dcoll.findOne({
-		deviceName : dName
-	});
-	var network = ncoll.findOne({
-		networkName : nName
-	});
-	var index = network.deviceList.indexOf(device);
-	// use splice hack to remove
-	// first param is where new elements should be added
-	// second param is how many elements to delete
-	// other params (elements that would be added) omitted
-	network.deviceList.splice(index, 1);
-	ncoll.save(network);
+function disconnectTwoNetworks(n1Name, n2Name)
+{
+	// To be implemented
+	// Need TRANSITIVE CLOSURE
+	// Possibly new collection in db?
+}
+function removeDeviceFromCurrentNetwork(dName)
+{
+	// To be implemented
 }
 
-function connectTwoNetworks(n1Name, n2Name) {
-	var n1 = ncoll.findOne({
-		networkName : n1Name
-	});
-	var n2 = ncoll.findOne({
-		networkName : n2Name
-	});
-	n1.connectedNetworks.push(n2);
-	n2.connectedNetworks.push(n1);
-
-	// Add code to enforce transitivity
-	// i.e. for network in n1.connectedNetworks, add to n2.connectedNetworks
-	// and viceversa, and for all networks in both lists
-
-	ncoll.save(n1);
-	ncoll.save(n2);
-
-}
-
-function disconnectTwoNetworks(n1Name, n2Name) {
-	var n1 = ncoll.findOne({
-		networkName : n1Name
-	});
-	var n2 = ncoll.findOne({
-		networkName : n2Name
-	});
-
-	// RED ALERT
-	// ADD CODE TO REMOVE FROM EACH OTHER'S CONNECTEDNETWORKS ARRAYS
-	// AS WELL AS TO HANDLE THE ISSUE OF TRANSITIVITY
-
-	ncoll.save(n1);
-	ncoll.save(n2);
-}
-
-function removeDeviceFromCurrentNetwork(dName) {
-	var device = dcoll.findOne({
-		deviceName : dName
-	});
-	var n = ncoll.find({
-		deviceList : {
-			$in : [ device ]
-		}
-	});
-	device.previousNetwork = n;
-	ncoll.update({
-		deviceList : {
-			$in : [ device ]
-		}
-	}, {
-		$pull : {
-			deviceList : device
-		}
-	});
-	dcoll.save(device);
-}
-
-function returnDeviceToPreviousNetwork(dName) {
-	var device = dcoll.findOne({
-		deviceName : dName
-	});
-	var pn = device.previousNetwork;
-	pn.deviceList.push(device);
-	ncoll.save(pn);
-}
-
-function getHoganTemplateVariables() {
-
-	var networkArray = ncoll.find().toArray();
-	var it = new nt.NetworkIterator();
-	it.each(function(thisNetwork) {
-		thisNetwork.numDev = thisNetwork.deviceList.length;
-	});
-	var deviceArray = dcoll.find().toArray();
-	var nTotal = networkArray.length;
-	var dTotal = deviceArray.length;
-
-	var obj = {
-		"networkTotal" : nTotal,
-		"networks" : networkArray,
-		"deviceTotal" : dTotal,
-		"devices" : deviceArray,
-		"appTotal" : 1,
-		"apps" : [ {
-			appName : "Counter"
-		} ]
-	}
-
-	return obj;
-
+function returnDeviceToPreviousNetwork(dName)
+{
+	// To be implemented
 }
 
 exports.importRDT = importRDT;
@@ -196,4 +295,3 @@ exports.connectTwoNetworks = connectTwoNetworks;
 exports.disconnectTwoNetworks = disconnectTwoNetworks;
 exports.removeDeviceFromCurrentNetwork = removeDeviceFromCurrentNetwork;
 exports.returnDeviceToPreviousNetwork = returnDeviceToPreviousNetwork;
-exports.getHoganTemplateVariables = getHoganTemplateVariables;
