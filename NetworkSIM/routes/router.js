@@ -202,6 +202,8 @@ exports.validateTokenRoute = function(req, res)
 		if (err)
 		{
 			console.log(err);
+			res.status(400);
+			res.end();
 		}
 
 		else
