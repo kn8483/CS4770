@@ -1,11 +1,13 @@
-/*window.onload = function() {
-	if ((!isAdministrator())) {
+window.onload = function()
+{
+	if ((!isAdministrator()))
+	{
 		alert("No valid stored username/password detected. You must be a Simulation "
-				+ "administrator to access this page. You will be redirected to the "
-				+ "index page.");
-		window.location.assign("http://www.google.ca");
+		    + "Administrator to access this page. You will be redirected to the "
+		    + "index, where you can login.");
+		window.location.assign("http://" + window.location.host + "/");
 	}
-};*/
+};
 
 // ---------------- Input Fields ------------------------------
 window.onload = function()

@@ -1,6 +1,13 @@
-/**
- * New node file
- */
+window.onload = function()
+{
+	if ((!isAdministrator()))
+	{
+		alert("No valid stored username/password detected. You must be a Simulation "
+		    + "Administrator to access this page. You will be redirected to the "
+		    + "index, where you can login.");
+		window.location.assign("http://" + window.location.host + "/");
+	}
+};
 
 function sendTokenButtonHandler()
 {
