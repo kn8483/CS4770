@@ -47,11 +47,18 @@ function hogan(res)
 		else
 		{
 			var networkArray = networks;
+			console.log('Must be networksArray '+ networkArray);
 			var nTotal = networkArray.length;
-			for (var i = 0; i < nTotal; i++)
-			{
+			for (var i = 0; i < nTotal; i++) {
 				var n = networkArray[i];
-				n.numDev = "DUMMYVALUE";
+				//console.log('DEVICE LIST: '+n.deviceList);
+				var devicesInNetwork = n.deviceList;
+				if(!devicesInNetwork){
+				     n.numDev=0;
+				}
+				else{ 
+				    n.numDev = devicesInNetwork.length;
+			    }
 			}
 			db.devices.find({}, function(err, devices)
 			{
@@ -106,6 +113,22 @@ exports.tokenDeliveryRoute = function(req, res)
 {
 	res.render('tokenDelivery');
 };
+
+exports.networkTopologyRoute = function(req, res)
+{
+	res.render('networkTopology');
+};
+
+exports.loggerRoute = function(req, res)
+{
+	res.render('logger');
+};
+
+exports.comingSoonRoute = function(req, res)
+{
+	res.render('comingSoon');
+};
+
 
 // ---- Login and Registration (from index.html)
 
@@ -308,7 +331,7 @@ exports.removeNetworkRoute = function(req, res)
 	console.log("req.body:");
 	console.log(req.body);
 	db.networks.remove(
-		{ networkName : req.body.networkName }, function(err, doc)
+		{ networkName : req.body.name }, function(err, doc)
 	{
 		if (err)
 		{
@@ -343,11 +366,8 @@ exports.addDeviceRoute = function(req, res)
 		{
 			console.log("The following device object was saved:");
 			console.log(doc);
-			// var template = getHoganTemplate();
-			// console.log(template);
 			res.status(200);
 			res.end();
-			// res.render('networkSettings', template);
 		}
 	});
 };
@@ -407,6 +427,12 @@ exports.addDeviceToNetworkRoute = function(req, res)
 					                if (!d)
 					                {
 						                d = new Device(req.body.deviceName);
+						                db.devices.save(d, function(err, doc){
+						                if(err){
+			                                 console.log(err);
+		                                }		else{
+					                }
+					                });
 					                }
 					                if (n.deviceList)
 					                {
@@ -446,7 +472,7 @@ exports.removeDeviceFromNetworkRoute = function(req, res)
 {
 	console.log("inside removeDeviceFromNetworkRoute");
 	console.log("req.body:");
-	console.log(req.body);
+	console.log(req.body.networkName);
 	db.networks
 	    .findOne(
 		        { networkName : req.body.networkName },
@@ -502,14 +528,48 @@ exports.removeDeviceFromNetworkRoute = function(req, res)
 	        });
 };
 
-exports.connectTwoNetworksRoute = function(req, res)
-{
+exports.connectTwoNetworksRoute = function(req, res) {
 	console.log("inside connectTwoNetworksRoute");
 	console.log("req.body:");
 	console.log(req.body);
-	console
-	    .log("Need to implement transitive connections and represent in database");
-	res.end();
+	console.log("Need to implement transitive connections and represent in database");
+	db.networks.findOne({ networkName : req.body.network1Name},function(err, n1) {
+	                    console.log('network object1 '+JSON.stringify(n1));
+						if (err) {
+							console.log(err);
+						} 
+						else {
+						n1.networksList = [];
+						n1.networksList.push(req.body.network2Name);
+						db.networks.save(n1, function(err, n) {
+												if (err) {
+												    console.log(err);
+												} 
+						   else{					
+						}});
+					}});
+												
+    db.networks.findOne({ networkName : req.body.network2Name},function(err, n2) {
+	                    console.log('network object1 '+JSON.stringify(n2));
+						if (err) {
+							console.log(err);
+						} else {
+						n2.networksList = [];
+						n2.networksList.push(req.body.network1Name);
+						db.networks.save(n2, function(err, n) {
+												if (err) {console.log(err);
+												} 
+						   else{					
+						}});
+					}});
+								
+						    						
+						   res.status(200);
+			               res.end();
+						   //}
+						   /*else{
+						   res.status(200);
+			               res.end();}*/
 };
 
 exports.disconnectTwoNetworksRoute = function(req, res)

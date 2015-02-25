@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript" src="/js/logger.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/logger.css"></link>
+
+   </head>
+   <body>
+   <form>
+  <div id="open"> Open the logger console here:  <input type="button" value="Open" onclick="Logger.show()" /> </div>
+     <div id="close">Close the logger console here:  <input type="button" value="Close" onclick="Logger.hide()"  /></div>
+	  <div id="clear">Clear the contents :  <input type="button" value="Clear" onclick="Logger.clear()"  /></div>
+	  <div id="text">Type information here:  <input type="text" name="input"  style="width:100px;" />
+       <input type="button" value="Submit the text" onclick="log(this.form.input.value);" style="width:100px;" /></div>
+	   </form>
+   </body>
+   </html>

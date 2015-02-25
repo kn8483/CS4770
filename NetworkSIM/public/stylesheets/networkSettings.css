@@ -91,6 +91,12 @@
 		border: 1px solid;
 		border-color: #383838;
 	}
+		#network_summary, #device_summary, #app_summary{
+			max-height: 200px;
+			border: 2px solid;
+			overflow: auto;
+			font-family: Georgia, "Times New Roman", Times, serif;
+		}
 form{
 	width: 100%;
 	margin-top: 5%;

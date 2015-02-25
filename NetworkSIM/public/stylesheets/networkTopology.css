@@ -1,0 +1,84 @@
+#t001{
+	width: 100%;
+	height: 100%;
+	background-color: #666;
+	border: 2px solid;
+}
+
+.network{
+	width: 64px;
+	height: 64px;
+	margin: 2px;
+} 
+.client{
+	width: 32px;
+	height: 32px;
+	background-color: #666;
+	margin: 1px;
+}
+
+.router{
+	width: 32px;
+	height: 32px;
+	background-color: #666;
+	margin: 1px;
+}
+
+/*.draggable {
+	
+	left: 0;
+	top: 0;
+	width: auto;
+	height: auto;
+	cursor: move;
+}*/
+.draggable{
+	padding: 5px;
+	position: fixed;
+	width: auto;
+	height: auto;
+	left: 400px;
+	top: 0px;
+	background-color: #ffffff;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #000;
+}
+
+#pu001{
+	/*position: visible;*/
+	padding: 4px;
+	position: fixed;
+	width: auto;
+	height: auto;
+	left: 400px;
+	top: 0px;
+	background-color: #ffffff;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #000;
+}
+
+/*
+#drag-me {
+	width: 20px;
+	height: 20px;
+	margin: 10%;
+
+	background-color: #29e;
+	color: white;
+
+	border: solid 0.4em #666;
+	border-radius: 0.75em;
+	padding: 3%;
+
+	-webkit-transform: translate(0px, 0px);
+		transform: translate(0px, 0px);
+}
+
+#drag-me::before {
+	content: "#" attr(id);
+	color: #000;
+}
+
+*/

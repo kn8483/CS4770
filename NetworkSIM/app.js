@@ -52,6 +52,9 @@ app.get('/userHome', router.userHomeRoute);
 app.get('/adminHome', router.adminHomeRoute);
 app.get('/networkSettings', router.networkSettingsRoute);
 app.get('/tokenDelivery', router.tokenDeliveryRoute);
+app.get('/networkTopology', router.networkTopologyRoute);
+app.get('/logger', router.loggerRoute);
+app.get('/comingSoon', router.comingSoonRoute);
 
 // network_settings
 app.post('/importRDT', router.importRDTRoute);

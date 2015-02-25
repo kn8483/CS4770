@@ -80,7 +80,7 @@
 			<div id="RightBox">
 				<h3>Remove Device</h3>
 				<label>Device Name:</label><input type="text" id="removeDeviceName">
-				<button id="removeDeviceButton" type="button" onclick="removeDeviceClickHandler()" style="margin-top:2px;">Add</button>
+				<button id="removeDeviceButton" type="button" onclick="removeDeviceClickHandler()" style="margin-top:2px;">Remove</button>
 			</div>
 			
 <!-- ADD DEVICE TO NETWORK -->
@@ -132,39 +132,37 @@
 				<button id="returnDeviceToPreviousNetworkButton" type="button" onclick="returnDeviceFromPreviousHandler()" style="margin-top:5px;">Add</button>
 			</div>
 		</div>
-		<div id="RightFrame">
-			<div id="NetworksTable">
-				<div id="network_summary">
-					<h2> Networks </h2> 
-					<p> Number of Networks: {{networkTotal}} </p> 
-					{{#networks}} 
-						<p class="cell"> 
-							Name: {{networkName}} <br>
-							Type: {{networkKind}} <br> 
-							Number of connected devices : {{numDev}} <br>
-						</p>
-					{{/networks}}
-				</div>	
-				<div id="device_summary">
-					<h2> Devices </h2> 
-					<p> Number of Devices: {{deviceTotal}} </p>
-					{{#devices}} 
-						<p class="cell"> 
-							Name: {{deviceName}} <br>
-							Assigned to User Device: {{assigned}} <br> 				
-						</p>
-					{{/devices}}
-				</div>			
-				<div id="app_summary">
-					<h2> Applications </h2> 
-					<p> Number of Applications: {{appTotal}} </p>
-					{{#apps}} 
-						<p class="cell"> 
-							Name: {{appName}} <br>			
-						</p>
-					{{/apps}}
-				</div>
-			</div>
+		<div id="RightFrame">				
+				<h2> Networks </h2> 
+				<p> Number of Networks: {{networkTotal}} </p> 
+			<div id="network_summary">
+				{{#networks}} 
+					<p class="cell"> 
+						Name: {{networkName}} <br>
+						Type: {{networkKind}} <br> 
+						Number of connected devices : {{numDev}} <br>
+					</p>
+				{{/networks}}
+			</div>			
+				<h2> Devices </h2> 
+				<p> Number of Devices: {{deviceTotal}} </p>
+			<div id="device_summary">
+				{{#devices}} 
+					<p class="cell"> 
+						Name: {{deviceName}} <br>
+						Assigned to User Device: {{assigned}} <br> 				
+					</p>
+				{{/devices}}
+			</div>			
+				<h2> Applications </h2> 
+				<p> Number of Applications: {{appTotal}} </p>
+			<div id="app_summary">
+				{{#apps}} 
+					<p class="cell"> 
+						Name: {{appName}} <br>			
+					</p>
+				{{/apps}}
+			</div>			
 		</div>
 	</div>
 </body>
